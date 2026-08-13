@@ -390,12 +390,31 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
                          '!queue / !np / !nextup / !recent / !stats / !remove 番号 / !clear / !help')
 
 
+_last_reply_time = 0.0
+_reply_backoff_until = 0.0
+
+
 async def post_reply(client, reply_to_id, text):
-    """リプライ投稿（エラーは握りつぶす）"""
+    """リプライ投稿（レート制限対策: 15秒間隔+429時5分バックオフ）"""
+    global _last_reply_time, _reply_backoff_until
+    now = time.time()
+    # 429バックオフ中は送信しない（スキップ）
+    if now < _reply_backoff_until:
+        print(f'⏳ 送信バックオフ中（あと{int(_reply_backoff_until - now)}秒）・リプをスキップ')
+        return
+    # 送信間隔制限（15秒に1本まで・Xのレート制限対策）
+    wait = _last_reply_time + 15 - now
+    if wait > 0:
+        await asyncio.sleep(wait)
     try:
         await client.create_tweet(text, reply_to=reply_to_id)
+        _last_reply_time = time.time()
     except Exception as e:
-        print('リプライ投稿エラー:', str(e)[:120])
+        err = str(e)
+        print('リプライ投稿エラー:', err[:120])
+        if '429' in err or 'Rate limit' in err:
+            _reply_backoff_until = time.time() + 300
+            print('⏳ 送信レート制限検出・5分バックオフ開始')
 
 
 # ---------------------------------------------------------------- 再生ループ
