@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import SiteShell from "@/components/SiteShell";
 import { commandsData, type Command } from "@/lib/commands";
 import { getDict } from "@/lib/i18n";
 
-function CommandRow({ cmd, dict }: { cmd: Command; dict: ReturnType<typeof getDict> }) {
+function CommandRow({
+  cmd,
+  dict,
+  loc,
+}: {
+  cmd: Command;
+  dict: ReturnType<typeof getDict>;
+  loc: string;
+}) {
   const [open, setOpen] = useState(false);
   const name = cmd.command || "(undefined)";
   const usage = cmd.usage || name;
@@ -34,9 +41,19 @@ function CommandRow({ cmd, dict }: { cmd: Command; dict: ReturnType<typeof getDi
       </button>
       {open && (
         <div className="space-y-2 bg-black/20 px-4 pb-4">
-          {cmd.ja && <p className="text-sm text-white">{cmd.ja}</p>}
-          {cmd.description && (
-            <p className="text-sm text-neutral-400">{cmd.description}</p>
+          {/* 言語ごとに説明は1つだけ表示（jaは日本語・en/zhは英語） */}
+          {loc === "ja" ? (
+            cmd.ja ? (
+              <p className="text-sm text-white">{cmd.ja}</p>
+            ) : (
+              cmd.description && (
+                <p className="text-sm text-neutral-400">{cmd.description}</p>
+              )
+            )
+          ) : (
+            cmd.description && (
+              <p className="text-sm text-neutral-400">{cmd.description}</p>
+            )
           )}
           {cmd.x_alias && (
             <p className="text-xs text-green-400">X: {cmd.x_alias}</p>
@@ -129,7 +146,6 @@ export default function CommandsPage() {
   }, []);
 
   return (
-    <SiteShell dict={getDict("ja")} locale="ja">
     <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="mb-2 text-3xl font-bold text-white">
         {dict.commandsTitle.replace("{n}", String(total))}
@@ -180,6 +196,7 @@ export default function CommandsPage() {
                   key={cmd.command || Math.random()}
                   cmd={cmd}
                   dict={dict}
+                  loc={loc}
                 />
               ))}
             </div>
@@ -187,6 +204,5 @@ export default function CommandsPage() {
         ))}
       </div>
     </div>
-    </SiteShell>
   );
 }
