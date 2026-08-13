@@ -13,5 +13,6 @@ COPY bot.py player.py song_queue.py config.example.json ./
 RUN cp config.example.json config.json && mkdir -p data
 
 ENV PYTHONPATH=/twifork
+ENV API_HOST=0.0.0.0
 EXPOSE 8768
 CMD ["python", "bot.py"]
