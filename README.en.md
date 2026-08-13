@@ -87,6 +87,12 @@ python bot.py
 └── docs/             # Documentation site (Next.js, multilingual)
 ```
 
+## 💝 Donate
+
+If you'd like to support this project:
+
+**https://ofuse.me/maebahesioru**
+
 ## ⚠️ Notes
 
 - This is an **unofficial** personal project. Not affiliated with the original Jockie Music

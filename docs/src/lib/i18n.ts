@@ -43,6 +43,10 @@ export const i18n = {
     options: "オプション",
     examplesLabel: "例",
     alias: "alias",
+    xSupported: "✅ X版対応",
+    xNotSupported: "X版非対応",
+    donate: "💝 寄付",
+    donateUrl: "https://ofuse.me/maebahesioru",
     footer: "X版Jockie Music - Jockie Musicの非公式Xポート（本家とは無関係です）",
   },
   en: {
@@ -77,6 +81,10 @@ export const i18n = {
     options: "Options",
     examplesLabel: "Examples",
     alias: "alias",
+    xSupported: "✅ X-ready",
+    xNotSupported: "not X-ready",
+    donate: "💝 Donate",
+    donateUrl: "https://ofuse.me/maebahesioru",
     footer: "Jockie Music for X - unofficial X port of Jockie Music (not affiliated)",
   },
   zh: {
@@ -111,6 +119,10 @@ export const i18n = {
     options: "选项",
     examplesLabel: "示例",
     alias: "别名",
+    xSupported: "✅ X版可用",
+    xNotSupported: "X版不可用",
+    donate: "💝 捐赠",
+    donateUrl: "https://ofuse.me/maebahesioru",
     footer: "X版Jockie Music - Jockie Music 的非官方 X 移植版（与本家无关）",
   },
 } as const;

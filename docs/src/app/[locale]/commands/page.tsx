@@ -18,6 +18,11 @@ function CommandRow({ cmd, dict }: { cmd: Command; dict: ReturnType<typeof getDi
           <code className="font-mono text-sm font-semibold text-jockie">
             !{name}
           </code>
+          {cmd.x && (
+            <span className="rounded bg-green-900/60 px-1.5 py-0.5 text-[10px] font-semibold text-green-400">
+              {dict.xSupported}
+            </span>
+          )}
           {cmd.aliases?.length > 0 && (
             <span className="text-xs text-neutral-500">
               {dict.alias}: {cmd.aliases.join(", ")}
@@ -28,8 +33,12 @@ function CommandRow({ cmd, dict }: { cmd: Command; dict: ReturnType<typeof getDi
       </button>
       {open && (
         <div className="space-y-2 bg-black/20 px-4 pb-4">
+          {cmd.ja && <p className="text-sm text-white">{cmd.ja}</p>}
           {cmd.description && (
-            <p className="text-sm text-neutral-300">{cmd.description}</p>
+            <p className="text-sm text-neutral-400">{cmd.description}</p>
+          )}
+          {cmd.x_alias && (
+            <p className="text-xs text-green-400">X: {cmd.x_alias}</p>
           )}
           {usage && (
             <p className="text-sm">

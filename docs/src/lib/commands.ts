@@ -11,6 +11,9 @@ export interface Command {
   description: string;
   options: CommandOption[];
   examples: string[];
+  ja?: string;
+  x?: boolean;
+  x_alias?: string;
 }
 
 export interface CommandCategory {

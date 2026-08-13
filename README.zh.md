@@ -87,6 +87,12 @@ python bot.py
 └── docs/             # 文档网站（Next.js，多语言）
 ```
 
+## 💝 捐赠
+
+如果您想支持这个项目：
+
+**https://ofuse.me/maebahesioru**
+
 ## ⚠️ 注意
 
 - 这是**非官方**的个人项目，与本家 Jockie Music 无关

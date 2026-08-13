@@ -150,10 +150,10 @@ async def process_tweet(client, tweet, queue, track, sessions, processed):
 
 
 async def monitor_mentions(client, queue, track, sessions):
-    """3ソースでメンションを監視:
-    1. 検索（get_user_mentions・シャドウバンは拾えない）
-    2. 通知欄（get_notifications('Mentions')・フォールバック）
-    3. 参加中スペースのツイートのリプ欄（conversation_ids・フォールバック・確実）"""
+    """3ソースでメンションを監視（優先度順）:
+    1. 通知欄（get_notifications('Mentions')・最速・シャドウバンも拾える）
+    2. 参加中スペースのツイートのリプ欄（conversation_ids・最新順・確実）
+    3. 検索（get_user_mentions・フォールバック・シャドウバンは拾えない）"""
     processed = set()
     pf = CFG['processed_file']
     if os.path.exists(pf):
@@ -164,17 +164,8 @@ async def monitor_mentions(client, queue, track, sessions):
 
     while True:
         rate_limited = False
-        # 1. 検索ベース
-        try:
-            mentions = await client.get_user_mentions(CFG['screen_name'], count=20)
-            for tweet in mentions:
-                await process_tweet(client, tweet, queue, track, sessions, processed)
-        except Exception as e:
-            print('検索エラー:', e)
-            if '429' in str(e) or 'Rate limit' in str(e):
-                rate_limited = True
 
-        # 2. 通知欄（フォールバック・シャドウバン対策）
+        # 1. 通知欄（最優先）
         try:
             notifs = await client.get_notifications('Mentions', count=40)
             for n in notifs:
@@ -186,12 +177,15 @@ async def monitor_mentions(client, queue, track, sessions):
             if '429' in str(e) or 'Rate limit' in str(e):
                 rate_limited = True
 
-        # 3. 参加中スペースのツイートのリプ欄（フォールバック・確実）
+        # 2. 参加中スペースのツイートのリプ欄（最新順・確実）
         try:
             stid = sessions.get('space_tweet_id')
             if stid:
                 parent = await client.get_tweet_by_id(stid)
-                for rid in (parent.conversation_ids or []):
+                # conversation_idsは関連度順の可能性があるため、ID降順（最新順）にソート
+                ids = list(parent.conversation_ids or [])
+                ids.sort(key=lambda x: int(x), reverse=True)
+                for rid in ids:
                     if str(rid) in processed:
                         continue
                     try:
@@ -202,6 +196,16 @@ async def monitor_mentions(client, queue, track, sessions):
                         pass
         except Exception as e:
             print('リプ欄エラー:', e)
+            if '429' in str(e) or 'Rate limit' in str(e):
+                rate_limited = True
+
+        # 3. 検索（フォールバック）
+        try:
+            mentions = await client.get_user_mentions(CFG['screen_name'], count=20)
+            for tweet in mentions:
+                await process_tweet(client, tweet, queue, track, sessions, processed)
+        except Exception as e:
+            print('検索エラー:', e)
             if '429' in str(e) or 'Rate limit' in str(e):
                 rate_limited = True
 

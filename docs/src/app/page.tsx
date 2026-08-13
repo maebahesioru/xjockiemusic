@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SiteShell from "@/components/SiteShell";
 import { getDict } from "@/lib/i18n";
 import { commandsData, categoryCounts } from "@/lib/commands";
 
@@ -21,6 +22,7 @@ export default function RootHomePage() {
   };
 
   return (
+    <SiteShell dict={dict} locale={locale}>
     <div className="mx-auto max-w-4xl px-4 py-10">
       <script
         type="application/ld+json"
@@ -104,5 +106,6 @@ export default function RootHomePage() {
         </div>
       </section>
     </div>
+    </SiteShell>
   );
 }
