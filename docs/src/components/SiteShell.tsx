@@ -26,6 +26,9 @@ export default function SiteShell({
             <Link href={`${home}commands`} className="hover:text-jockie">
               {dict.navCommands}
             </Link>
+            <Link href={`${home}control`} className="font-semibold text-jockie hover:opacity-80">
+              {dict.navControl}
+            </Link>
             <LangSwitcher current={locale} />
           </nav>
         </div>

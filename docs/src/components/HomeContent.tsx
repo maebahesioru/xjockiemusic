@@ -35,8 +35,14 @@ export default function HomeContent({ locale }: { locale: string }) {
         <p className="mb-6 text-sm text-neutral-400">{dict.heroDesc2}</p>
         <div className="flex justify-center gap-3">
           <Link
-            href={`${home}commands`}
+            href={`${home}control`}
             className="rounded-lg bg-jockie px-5 py-2.5 font-semibold text-white hover:bg-jockie-dark"
+          >
+            🎛️ {dict.navControl}
+          </Link>
+          <Link
+            href={`${home}commands`}
+            className="rounded-lg border border-neutral-700 px-5 py-2.5 font-semibold text-neutral-200 hover:bg-white/5"
           >
             {dict.commandsButton.replace("{n}", String(total))}
           </Link>

@@ -16,8 +16,9 @@ export const i18n = {
     tagline: "X (Twitter) のスペースで動く音楽リクエストbot",
     description:
       "X (Twitter) のスペースで動く音楽リクエストbot。スペースツイートのリプにメンションするだけで曲をリクエスト・再生できる、Jockie Musicの非公式Xポート。",
-    navHome: "使い方",
+    navHome: "ホーム",
     navCommands: "コマンド一覧",
+    navControl: "🎛️ コントロール",
     heroTitle: "X版Jockie Music",
     heroDesc1: "X (Twitter) のスペースで動く音楽リクエストbot",
     heroDesc2:
@@ -55,8 +56,9 @@ export const i18n = {
     tagline: "Music request bot that runs in X (Twitter) Spaces",
     description:
       "A music request bot that runs in X (Twitter) Spaces. Just mention the bot in a reply to your Space tweet to request and play music — an unofficial X port of Jockie Music.",
-    navHome: "Usage",
+    navHome: "Home",
     navCommands: "Commands",
+    navControl: "🎛️ Control",
     heroTitle: "Jockie Music for X",
     heroDesc1: "Music request bot that runs in X (Twitter) Spaces",
     heroDesc2:
@@ -94,8 +96,9 @@ export const i18n = {
     tagline: "在 X（Twitter）Space 中运行的音乐点歌机器人",
     description:
       "在 X（Twitter）Space 中运行的音乐点歌机器人。只需在 Space 推文的回复中提及机器人，即可点歌和播放——Jockie Music 的非官方 X 移植版。",
-    navHome: "使用方法",
+    navHome: "首页",
     navCommands: "命令列表",
+    navControl: "🎛️ 控制台",
     heroTitle: "X版Jockie Music",
     heroDesc1: "在 X（Twitter）Space 中运行的音乐点歌机器人",
     heroDesc2:
