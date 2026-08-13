@@ -29,7 +29,8 @@
      "description": "Deletes all command related messages",
      "arguments": [],
      "command": "clean",
-     "x": false
+     "x": false,
+     "ja": "botã®é¢é£ãã¤ã¼ãï¼ã³ãã³ãå¿ç­ã®ãªãã©ã¤ï¼ãå¨é¨åé¤ãã¦æ´çãã¾ãã"
     },
     {
      "short_description": "Do you wish to support this project? Consider donating",
@@ -41,7 +42,8 @@
      "options": [],
      "arguments": [],
      "command": "premium",
-     "x": false
+     "x": false,
+     "ja": "ãã¬ãã¢ã ãã©ã³ã®æå ±ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "View all the leaderboards",
@@ -60,7 +62,8 @@
      ],
      "arguments": [],
      "command": "leaderboard",
-     "x": false
+     "x": false,
+     "ja": "ãªã¼ãã¼ãã¼ããè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Shows the leaderboard for bot upvotes",
@@ -86,7 +89,8 @@
      "description": "Shows the leaderboard for bot upvotes, by default it shows the upvotes from the start of the current month",
      "arguments": [],
      "command": "leaderboard votes",
-     "x": false
+     "x": false,
+     "ja": "botã®æç¥¨ï¼upvoteï¼ãªã¼ãã¼ãã¼ããè¡¨ç¤ºãã¾ãã"
     },
     {
      "aliases": [
@@ -98,7 +102,8 @@
      "description": "Vote for the bot on bot lists to support it!",
      "arguments": [],
      "command": "vote",
-     "x": false
+     "x": false,
+     "ja": "botãªã¹ãã§æç¥¨ãã¦botãå¿æ´ã§ãã¾ãï¼"
     }
    ],
    "subCategories": [
@@ -293,7 +298,8 @@
      "description": "Toggle autoplay, autoplay will queue related tracks when there are no more tracks in the queue.",
      "arguments": [],
      "command": "autoplay toggle",
-     "x": false
+     "x": false,
+     "ja": "ãªã¼ããã¬ã¤ã®åãæ¿ããæå¹ã«ããã¨ã­ã¥ã¼ãç©ºã«ãªã£ãã¨ãé¢é£æ²ãèªåã§è¿½å ãã¾ãã"
     },
     {
      "aliases": [
@@ -460,7 +466,8 @@
      "description": "Queue your recently played tracks",
      "arguments": [],
      "command": "playrecent",
-     "x": false
+     "x": false,
+     "ja": "æè¿åçããæ²ãã­ã¥ã¼ã«è¿½å ãã¾ãã"
     },
     {
      "aliases": [],
@@ -529,7 +536,8 @@
       }
      ],
      "command": "radio",
-     "x": false
+     "x": false,
+     "ja": "ã©ã¸ãªå±ãæ¤ç´¢ãã¦åçãã¾ãã"
     },
     {
      "short_description": "Resume a previous session",
@@ -547,7 +555,8 @@
      "description": "Resume your most recent session which you were the owner of, resuming a session will make it go back to the exact state it was in before the bot left.",
      "arguments": [],
      "command": "resume session",
-     "x": false
+     "x": false,
+     "ja": "èªåããªã¼ãã¼ã ã£ãç´è¿ã®ã»ãã·ã§ã³ãåéãã¾ãã"
     },
     {
      "short_description": "Makes me join your voice channel",
@@ -660,7 +669,8 @@
       }
      ],
      "command": "album search",
-     "x": false
+     "x": false,
+     "ja": "ã¢ã«ãã ãæ¤ç´¢ãã¦ã­ã¥ã¼ã«è¿½å ãã¾ãã"
     },
     {
      "aliases": [
@@ -722,7 +732,8 @@
       }
      ],
      "command": "playlist search",
-     "x": false
+     "x": false,
+     "ja": "ãã¬ã¤ãªã¹ããæ¤ç´¢ãã¦ã­ã¥ã¼ã«è¿½å ãã¾ãã"
     },
     {
      "aliases": [],
@@ -926,7 +937,8 @@
       }
      ],
      "command": "playleave",
-     "x": false
+     "x": false,
+     "ja": "ãã©ãã¯ãã­ã¥ã¼ã«è¿½å ããåçãçµãã£ããbotãéåºãã¾ãã"
     },
     {
      "short_description": "Select and queue a single track from a playlist by url",
@@ -988,7 +1000,8 @@
       }
      ],
      "command": "playselect",
-     "x": false
+     "x": false,
+     "ja": "URLãããã¬ã¤ãªã¹ãåã®1æ²ãé¸ãã§ã­ã¥ã¼ã«è¿½å ãã¾ãã"
     },
     {
      "short_description": "Queue a single track from a playlist by url",
@@ -1051,7 +1064,8 @@
       }
      ],
      "command": "playsingle",
-     "x": false
+     "x": false,
+     "ja": "URLãããã¬ã¤ãªã¹ãåã®1æ²ãã­ã¥ã¼ã«è¿½å ãã¾ãã"
     }
    ],
    "subCategories": []
@@ -1136,7 +1150,8 @@
       }
      ],
      "command": "end time",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®ãã©ãã¯ã®çµäºä½ç½®ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Wind the track forwards",
@@ -1224,7 +1239,8 @@
       }
      ],
      "command": "start time",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®ãã©ãã¯ã®éå§ä½ç½®ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Change the volume",
@@ -1465,7 +1481,8 @@
       }
      ],
      "command": "mass move",
-     "x": false
+     "x": false,
+     "ja": "ã­ã¥ã¼åã®è¤æ°ãã©ãã¯ãã¾ã¨ãã¦ç§»åãã¾ãï¼first/lastæå®å¯ï¼ã"
     },
     {
      "short_description": "Move a track in the queue",
@@ -1587,7 +1604,8 @@
       }
      ],
      "command": "reorder",
-     "x": false
+     "x": false,
+     "ja": "æå®ãªãã·ã§ã³ã§ã­ã¥ã¼ãä¸¦ã¹æ¿ãã¾ãã"
     }
    ],
    "subCategories": [
@@ -2236,7 +2254,8 @@
      "options": [],
      "arguments": [],
      "command": "queue information",
-     "x": false
+     "x": false,
+     "ja": "ã­ã¥ã¼ã«é¢ããæå ±ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "aliases": [
@@ -2282,7 +2301,8 @@
       }
      ],
      "command": "requested",
-     "x": false
+     "x": false,
+     "ja": "åæ²ãèª°ããªã¯ã¨ã¹ãããããè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Save a song to our private messages",
@@ -2308,7 +2328,8 @@
       }
      ],
      "command": "save",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®æ²ã®æå ±ãDMã§éä¿¡ãã¾ãã"
     },
     {
      "aliases": [
@@ -2327,7 +2348,8 @@
      "description": "Get information about the current session",
      "arguments": [],
      "command": "session information",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®ã»ãã·ã§ã³ã®æå ±ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "aliases": [
@@ -2377,7 +2399,8 @@
      "description": "Get a list of all the upcoming tracks, not to be confused with the `queue` command which will show all the tracks including the ones already played",
      "arguments": [],
      "command": "upcoming",
-     "x": false
+     "x": false,
+     "ja": "ä»å¾ã®ãã©ãã¯ã®ãªã¹ããè¡¨ç¤ºãã¾ãã"
     }
    ],
    "subCategories": [
@@ -2542,7 +2565,8 @@
       }
      ],
      "command": "profile set server visibility",
-     "x": false
+     "x": false,
+     "ja": "ãã®ãµã¼ãã¼ã§ãã­ãã£ã¼ã«ãã¼ã¿ãè¦ãããäººãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "View your profile",
@@ -2567,7 +2591,8 @@
       }
      ],
      "command": "profile",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Set your profile avatar background",
@@ -2604,7 +2629,8 @@
       }
      ],
      "command": "profile set avatar background",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼èæ¯ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set your profile avatar border",
@@ -2641,7 +2667,8 @@
       }
      ],
      "command": "profile set avatar border",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼æ ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set your profile avatar shape, `circle` or `square`",
@@ -2678,7 +2705,8 @@
       }
      ],
      "command": "profile set avatar shape",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼å½¢ç¶ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set your profile background",
@@ -2722,7 +2750,8 @@
       }
      ],
      "command": "profile set background",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®èæ¯ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set your profile color",
@@ -2764,7 +2793,8 @@
       }
      ],
      "command": "profile set color",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®è²ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set what parts (servers, friends and tracks) are visible on your profile",
@@ -2808,7 +2838,8 @@
       }
      ],
      "command": "profile set privacy",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ã®å¬éç¯å²ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set who can view your profile, `public` or `private`",
@@ -2846,7 +2877,8 @@
       }
      ],
      "command": "profile set visibility",
-     "x": false
+     "x": false,
+     "ja": "ãã­ãã£ã¼ã«ãè¦ãããäººãè¨­å®ãã¾ãï¼public/privateç­ï¼ã"
     }
    ],
    "subCategories": []
@@ -2878,7 +2910,8 @@
       }
      ],
      "command": "collection clone",
-     "x": false
+     "x": false,
+     "ja": "ã³ã¬ã¯ã·ã§ã³ãè¤è£½ãã¾ãã"
     },
     {
      "short_description": "Delete a saved collection",
@@ -2903,7 +2936,8 @@
       }
      ],
      "command": "collection delete",
-     "x": false
+     "x": false,
+     "ja": "ã³ã¬ã¯ã·ã§ã³ãåé¤ãã¾ãã"
     },
     {
      "short_description": "Import your Groovy playlist from a CSV file",
@@ -2918,7 +2952,8 @@
       }
      ],
      "command": "collection import",
-     "x": false
+     "x": false,
+     "ja": "ã³ã¬ã¯ã·ã§ã³ãã¤ã³ãã¼ããã¾ãï¼ãã¬ãã¢ã éå®ï¼ã"
     },
     {
      "short_description": "Merge two of your collections together",
@@ -2944,7 +2979,8 @@
       }
      ],
      "command": "collection merge",
-     "x": false
+     "x": false,
+     "ja": "2ã¤ã®ã³ã¬ã¯ã·ã§ã³ãçµ±åãã¾ãã"
     },
     {
      "short_description": "Shows all your saved collections and their content",
@@ -2971,7 +3007,8 @@
       }
      ],
      "command": "collections",
-     "x": false
+     "x": false,
+     "ja": "ã³ã¬ã¯ã·ã§ã³ã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Create an empty collection",
@@ -2996,7 +3033,8 @@
       }
      ],
      "command": "collection create",
-     "x": false
+     "x": false,
+     "ja": "æ°ããã³ã¬ã¯ã·ã§ã³ãä½æãã¾ãã"
     },
     {
      "short_description": "Save the current queue",
@@ -3021,7 +3059,8 @@
       }
      ],
      "command": "collection save",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®ã­ã¥ã¼ãã³ã¬ã¯ã·ã§ã³ã¨ãã¦ä¿å­ãã¾ãã"
     },
     {
      "aliases": [
@@ -3093,7 +3132,8 @@
       }
      ],
      "command": "collection load",
-     "x": false
+     "x": false,
+     "ja": "æ¢å­ã®ã³ã¬ã¯ã·ã§ã³ãã­ã¥ã¼ã«èª­ã¿è¾¼ãã§åçãã¾ãã"
     }
    ],
    "subCategories": [
@@ -3438,7 +3478,8 @@
      ],
      "arguments": [],
      "command": "settings",
-     "x": false
+     "x": false,
+     "ja": "ç¾å¨ã®è¨­å®ãè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Reset all the settings",
@@ -3469,7 +3510,8 @@
      ],
      "arguments": [],
      "command": "settings reset",
-     "x": false
+     "x": false,
+     "ja": "è¨­å®ããªã»ãããã¾ãã"
     }
    ],
    "subCategories": [
@@ -5004,7 +5046,8 @@
       }
      ],
      "command": "permission allow",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã®ç¹å®ã®æ¨©éãè¨±å¯ãã¾ãã"
     },
     {
      "short_description": "Deny a specific permission for the current session",
@@ -5059,7 +5102,8 @@
       }
      ],
      "command": "permission deny",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã®ç¹å®ã®æ¨©éãæå¦ãã¾ãã"
     },
     {
      "short_description": "Get the permissions of the current session or a user",
@@ -5112,7 +5156,8 @@
       }
      ],
      "command": "permissions",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã¾ãã¯ã¦ã¼ã¶ã¼ã®æ¨©éãè¡¨ç¤ºãã¾ãã"
     },
     {
      "short_description": "Allow all permissions",
@@ -5161,7 +5206,8 @@
       }
      ],
      "command": "permissions allow all",
-     "x": false
+     "x": false,
+     "ja": "ãã¹ã¦ã®æ¨©éãè¨±å¯ãã¾ãã"
     },
     {
      "short_description": "Deny all permission for the current session",
@@ -5210,7 +5256,8 @@
       }
      ],
      "command": "permissions deny all",
-     "x": false
+     "x": false,
+     "ja": "ãã¹ã¦ã®æ¨©éãæå¦ãã¾ãã"
     },
     {
      "short_description": "Reset the permissions of a session or user",
@@ -5256,7 +5303,8 @@
       }
      ],
      "command": "permissions reset",
-     "x": false
+     "x": false,
+     "ja": "æ¨©éè¨­å®ããªã»ãããã¾ãã"
     }
    ],
    "subCategories": []
@@ -5276,7 +5324,8 @@
      "options": [],
      "arguments": [],
      "command": "claim ownership",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã®ãªã¼ãã¼æ¨©ãä¸»å¼µãã¾ãã"
     },
     {
      "short_description": "Update announcement channel",
@@ -5298,7 +5347,8 @@
       }
      ],
      "command": "rebind",
-     "x": false
+     "x": false,
+     "ja": "ã¢ãã¦ã³ã¹ãããã£ã³ãã«ãæ´æ°ãã¾ãã"
     },
     {
      "short_description": "Transfer the session ownership to another member",
@@ -5322,7 +5372,8 @@
       }
      ],
      "command": "transfer ownership",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã®ãªã¼ãã¼æ¨©ãå¥ã®ã¦ã¼ã¶ã¼ã«è­²æ¸¡ãã¾ãã"
     }
    ],
    "subCategories": []
@@ -5352,7 +5403,8 @@
      ],
      "arguments": [],
      "command": "prefix list",
-     "x": false
+     "x": false,
+     "ja": "ä½¿ç¨å¯è½ãªãã¬ãã£ãã¯ã¹ã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
     }
    ],
    "subCategories": [
@@ -5633,7 +5685,8 @@
       }
      ],
      "command": "announce channel reset",
-     "x": false
+     "x": false,
+     "ja": "è¨­å®ããã¦ããã¢ãã¦ã³ã¹ãã£ã³ãã«ãè§£é¤ãã¾ãã"
     },
     {
      "short_description": "Set the announce channel for all sessions",
@@ -5677,7 +5730,8 @@
       }
      ],
      "command": "announce channel set",
-     "x": false
+     "x": false,
+     "ja": "ã¢ãã¦ã³ã¹ãã£ã³ãã«ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Auto deletes the message which triggered a command",
@@ -5698,7 +5752,8 @@
      "description": "Auto deletes the message which triggered a command, note that this does not delete the bot's response",
      "arguments": [],
      "command": "auto delete toggle",
-     "x": false
+     "x": false,
+     "ja": "ã³ãã³ããããªã¬ã¼ããã¡ãã»ã¼ã¸ãèªååé¤ãããåãæ¿ãã¾ãã"
     },
     {
      "short_description": "24/7 mode, the bot will not leave the channel by itself",
@@ -5758,7 +5813,8 @@
      ],
      "boosts": 5,
      "command": "24/7",
-     "x": false
+     "x": false,
+     "ja": "24/7モードを切り替えます。有効にするとbotが自分から退出しなくなります。"
     },
     {
      "short_description": "Lock the session, locking a session disables the permissions",
@@ -5777,7 +5833,8 @@
      "description": "Lock the session, locking a session disables the permissions for that session, meaning no one will be able to change anything. A locked session can also be unlocked with this command",
      "arguments": [],
      "command": "lock",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ãã­ãã¯ãã¦æ¨©éå¤æ´ãç¡å¹åãã¾ãã"
     },
     {
      "short_description": "Allows a single user to own multiple sessions",
@@ -5821,7 +5878,8 @@
       }
      ],
      "command": "multi bot ownership",
-     "x": false
+     "x": false,
+     "ja": "è¤æ°botã®ãªã¼ãã¼è¨­å®ãç®¡çãã¾ãã"
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -5865,7 +5923,8 @@
       }
      ],
      "command": "preferred bots server",
-     "x": false
+     "x": false,
+     "ja": "ãµã¼ãã¼ã§botãåå ããåªåé ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Set who can view dashboard statistics for this server, `everyone` or `none`",
@@ -5911,7 +5970,8 @@
       }
      ],
      "command": "dashboard statistics access",
-     "x": false
+     "x": false,
+     "ja": "ãµã¼ãã¼ã®ããã·ã¥ãã¼ãçµ±è¨ãè¦ãããäººãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Auto deletes paged messages when they are replaced",
@@ -5930,7 +5990,8 @@
      "description": "Toggle whether or not paged results should be deleted once they are replaced by a new one from another command, when this is disabled it will keep the message and prevent further input after it has been replaced.\n\nNote that this only applies to new paged results from the same user.",
      "arguments": [],
      "command": "page replace delete toggle",
-     "x": false
+     "x": false,
+     "ja": "ãã¼ã¸çµæãç½®æãããåé¤ããããåãæ¿ãã¾ãã"
     },
     {
      "short_description": "Auto deletes paged messages when they timeout",
@@ -5949,7 +6010,8 @@
      "description": "Toggle whether or not paged results should be deleted once they timeout, when this is disabled it will keep the message and prevent further input after it has has timedout",
      "arguments": [],
      "command": "page delete toggle",
-     "x": false
+     "x": false,
+     "ja": "ãã¼ã¸çµæãåé¤ãããã©ãããåãæ¿ãã¾ãã"
     },
     {
      "short_description": "Set the timeout time for sessions",
@@ -6006,7 +6068,8 @@
       }
      ],
      "command": "timeout set",
-     "x": false
+     "x": false,
+     "ja": "ã»ãã·ã§ã³ã®ã¿ã¤ã ã¢ã¦ãæéãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "View all session timeout durations",
@@ -6016,7 +6079,8 @@
      "options": [],
      "arguments": [],
      "command": "timeouts",
-     "x": false
+     "x": false,
+     "ja": "ã¿ã¤ã ã¢ã¦ãã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
     }
    ],
    "subCategories": [
@@ -6881,7 +6945,8 @@
      "description": "Toggle automatic correction of misspelled commands, for instance, if you write `pley hello` it would be corrected to `play hello`. It will ask you before executing the command.",
      "arguments": [],
      "command": "auto correct toggle",
-     "x": false
+     "x": false,
+     "ja": "ã³ãã³ãã®èª¤å­ãèªåä¿®æ­£ãããåãæ¿ãã¾ãã"
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -6936,7 +7001,8 @@
       }
      ],
      "command": "preferred bots",
-     "x": false
+     "x": false,
+     "ja": "botãåå ããåªåé ãè¨­å®ãã¾ãã"
     },
     {
      "short_description": "Toggle automatic default volume mode",
@@ -6949,7 +7015,8 @@
      "description": "Toogle automatic default volume mode, this means that if you set the volume with the `volume` command it will automatically update your default volume. Note that this will only work if the properties mode is set to user",
      "arguments": [],
      "command": "volume automatic toggle",
-     "x": false
+     "x": false,
+     "ja": "èªåããã©ã«ãé³éã¢ã¼ããåãæ¿ãã¾ãã"
     }
    ],
    "subCategories": []
@@ -7016,7 +7083,8 @@
      ],
      "boosts": 5,
      "command": "24/7",
-     "x": false
+     "x": false,
+     "ja": "24/7モードを切り替えます。有効にするとbotが自分から退出しなくなります。"
     },
     {
      "short_description": "Import your Groovy playlist from a CSV file",
@@ -7031,7 +7099,8 @@
       }
      ],
      "command": "collection import",
-     "x": false
+     "x": false,
+     "ja": "ã³ã¬ã¯ã·ã§ã³ãã¤ã³ãã¼ããã¾ãï¼ãã¬ãã¢ã éå®ï¼ã"
     }
    ],
    "subCategories": [
@@ -7612,7 +7681,8 @@
    "description": "Use this to get to the previous page of a paged message",
    "arguments": [],
    "command": "previous page",
-   "x": false
+   "x": false,
+   "ja": "ãã¼ã¸è¡¨ç¤ºã®åã®ãã¼ã¸ã«ç§»åãã¾ãã"
   },
   {
    "aliases": [
@@ -7632,7 +7702,8 @@
     }
    ],
    "command": "go to page",
-   "x": false
+   "x": false,
+   "ja": "ãã¼ã¸è¡¨ç¤ºã®ä»»æã®ãã¼ã¸ã«ç§»åãã¾ãã"
   },
   {
    "aliases": [
@@ -7644,7 +7715,8 @@
    "description": "Use this to get to the next page of a paged message",
    "arguments": [],
    "command": "next page",
-   "x": false
+   "x": false,
+   "ja": "ãã¼ã¸è¡¨ç¤ºã®æ¬¡ã®ãã¼ã¸ã«ç§»åãã¾ãã"
   },
   {
    "aliases": [],
@@ -7654,7 +7726,8 @@
    "description": "Use this to cancel a paged message",
    "arguments": [],
    "command": "cancel",
-   "x": false
+   "x": false,
+   "ja": "ãã¼ã¸è¡¨ç¤ºãã­ã£ã³ã»ã«ãã¾ãã"
   },
   {
    "aliases": [
@@ -7677,7 +7750,8 @@
     }
    ],
    "command": "select",
-   "x": false
+   "x": false,
+   "ja": "é¸æè¢ããé ç®ãé¸ã³ã¾ãã"
   },
   {
    "short_description": "Use this to have me re-send any paged message",
@@ -7690,7 +7764,8 @@
    "description": "Use this to have me re-send any paged message, note that this will only re-send any already existing paged result and will not do anything if it timed-out",
    "arguments": [],
    "command": "renew",
-   "x": false
+   "x": false,
+   "ja": "ãã¼ã¸è¡¨ç¤ºãæ´æ°ãã¾ãã"
   }
  ]
 }

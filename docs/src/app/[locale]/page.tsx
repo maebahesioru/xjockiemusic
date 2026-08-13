@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getDict } from "@/lib/i18n";
-import { xCategoryCounts } from "@/lib/commands";
+import { categoryCounts } from "@/lib/commands";
 
 const BASE = "https://maebahesioru.github.io/xjockiemusic";
 
@@ -11,7 +11,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const dict = getDict(locale);
-  const counts = xCategoryCounts();
+  const counts = categoryCounts();
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   const home = locale === "ja" ? "/" : `/${locale}`;
   const langAttr = locale === "ja" ? "ja" : locale === "zh" ? "zh" : "en";
