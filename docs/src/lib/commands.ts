@@ -5,13 +5,18 @@ export interface CommandOption {
   ja?: string;
 }
 
+export interface CommandExample {
+  options: string[];
+  arguments: string[];
+}
+
 export interface Command {
   command: string;
   aliases: string[];
   usage: string;
   description: string;
   options: CommandOption[];
-  examples: string[];
+  examples: (string | CommandExample)[];
   ja?: string;
   x?: boolean;
   x_alias?: string;

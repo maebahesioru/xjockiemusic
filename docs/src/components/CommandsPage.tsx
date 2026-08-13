@@ -74,14 +74,29 @@ function CommandRow({
               <div className="mb-1 text-xs text-neutral-500">
                 {dict.examplesLabel}:
               </div>
-              {cmd.examples.map((e, i) => (
-                <code
-                  key={i}
-                  className="block font-mono text-xs text-neutral-400"
-                >
-                  !{e}
-                </code>
-              ))}
+              {cmd.examples.map((e, i) => {
+                // examplesは {options, arguments} 形式のオブジェクト or 文字列
+                let text = "";
+                if (typeof e === "string") {
+                  text = e;
+                } else if (e && typeof e === "object") {
+                  const opts = ((e as { options?: string[] }).options || []).join(
+                    " "
+                  );
+                  const args = (
+                    (e as { arguments?: string[] }).arguments || []
+                  ).join(" ");
+                  text = [opts, args].filter(Boolean).join(" ");
+                }
+                return (
+                  <code
+                    key={i}
+                    className="block font-mono text-xs text-neutral-400"
+                  >
+                    !{name} {text}
+                  </code>
+                );
+              })}
             </div>
           )}
         </div>
