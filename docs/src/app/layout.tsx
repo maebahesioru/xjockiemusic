@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "X版Jockie Music | スペースで音楽リクエストbot",
   description:
     "X (Twitter) のスペースで動く音楽リクエストbot。スペースツイートのリプにメンションするだけで曲をリクエスト・再生できる、Jockie Musicの非公式Xポート。",
+  metadataBase: new URL("https://maebahesioru.github.io/xjockiemusic"),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
