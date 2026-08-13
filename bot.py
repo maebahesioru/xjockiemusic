@@ -20,7 +20,28 @@ import yt_dlp
 from song_queue import Queue
 from player import SongTrack
 
-CFG = json.load(open(os.path.join(os.path.dirname(__file__), 'config.json'), encoding='utf-8'))
+def load_cfg():
+    """config.json + 環境変数（Docker/Coolify用・環境変数優先）"""
+    base = os.path.dirname(os.path.abspath(__file__))
+    cfg = json.load(open(os.path.join(base, 'config.json'), encoding='utf-8'))
+    env_map = {
+        'COOKIE_JSON': 'cookie_json',   # CookieのJSON文字列（そのまま）
+        'API_TOKEN': 'api_token',
+        'SCREEN_NAME': 'screen_name',
+        'API_PORT': 'api_port',
+        'MAX_QUEUE': 'max_queue',
+        'QUEUE_FILE': 'queue_file',
+        'AUDIO_CACHE': 'audio_cache',
+        'SPACE_TITLE': 'space_title',
+    }
+    for env_key, cfg_key in env_map.items():
+        v = os.environ.get(env_key)
+        if v:
+            cfg[cfg_key] = v
+    return cfg
+
+
+CFG = load_cfg()
 
 SPACE_URL_RE = re.compile(r'x\.com/i/spaces/([0-9A-Za-z]+)')
 HISTORY_FILE = os.path.join(os.path.dirname(__file__), 'data', 'history.json')
@@ -492,26 +513,210 @@ async def play_loop(client, queue, track, sessions):
 
 
 # ---------------------------------------------------------------- メイン
+# グローバル状態（APIからアクセスするため）
+G_client = None
+G_track = None
+G_sessions = None
+G_queue = None
+G_loop = None
+
+# ---------------------------------------------------------------- Web API（サイト制御用）
+from flask import Flask, request, jsonify
+import threading
+
+api_app = Flask(__name__)
+API_TOKEN = CFG.get('api_token', '')
+
+
+def api_auth_ok():
+    if not API_TOKEN:
+        return True
+    auth = request.headers.get('Authorization', '')
+    return auth == f'Bearer {API_TOKEN}'
+
+
+async def _noop():
+    """何もしない（API用プレースホルダ）"""
+    pass
+
+
+def run_coro(coro, timeout=60):
+    """botのイベントループ上でコルーチンを実行（APIスレッドから）"""
+    future = asyncio.run_coroutine_threadsafe(coro, G_loop)
+    return future.result(timeout=timeout)
+
+
+@api_app.route('/api/status')
+def api_status():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    cur = G_sessions.get('current') if G_sessions else None
+    items = G_queue.list() if G_queue else []
+    return jsonify({
+        'ok': True,
+        'current': cur,
+        'queue': [{'title': it['title'], 'user': it['user']} for it in items],
+        'queue_len': len(items),
+        'space_id': G_sessions.get('space_id') if G_sessions else None,
+        'joined': bool(G_sessions.get('session')) if G_sessions else False,
+        'history_len': len(load_history()),
+    })
+
+
+@api_app.route('/api/play', methods=['POST'])
+def api_play():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    d = request.get_json(force=True, silent=True) or {}
+    query = (d.get('query') or '').strip()
+    opts = d.get('opts') or {}
+    if not query:
+        return jsonify({'ok': False, 'error': 'queryが必要'}), 400
+    try:
+        title, url, dur = run_coro(resolve(query), timeout=60)
+        if opts.get('insert') or opts.get('now'):
+            G_queue.insert(title, url, d.get('user', 'site'), 0)
+            if opts.get('now'):
+                run_coro(G_track.skip() if hasattr(G_track, 'skip') else _noop())
+                return jsonify({'ok': True, 'action': 'now', 'title': title})
+            return jsonify({'ok': True, 'action': 'insert', 'title': title})
+        n = G_queue.add(title, url, d.get('user', 'site'))
+        return jsonify({'ok': True, 'action': 'add', 'title': title, 'pos': n})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)[:200]}), 500
+
+
+@api_app.route('/api/skip', methods=['POST'])
+def api_skip():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    G_track.skip()
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/pause', methods=['POST'])
+def api_pause():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    G_track.pause()
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/resume', methods=['POST'])
+def api_resume():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    G_track.resume()
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/volume', methods=['POST'])
+def api_volume():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    d = request.get_json(force=True, silent=True) or {}
+    v = int(d.get('value', 100))
+    G_track.set_volume(max(0, min(200, v)))
+    return jsonify({'ok': True, 'volume': v})
+
+
+@api_app.route('/api/shuffle', methods=['POST'])
+def api_shuffle():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    G_queue.shuffle()
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/clear', methods=['POST'])
+def api_clear():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    G_queue.clear()
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/remove', methods=['POST'])
+def api_remove():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    d = request.get_json(force=True, silent=True) or {}
+    idx = int(d.get('index', 0)) - 1
+    it = G_queue.remove(idx)
+    return jsonify({'ok': True, 'removed': it['title'] if it else None})
+
+
+@api_app.route('/api/join', methods=['POST'])
+def api_join():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    d = request.get_json(force=True, silent=True) or {}
+    url = (d.get('space_url') or '').strip()
+    m = SPACE_URL_RE.search(url)
+    if not m:
+        return jsonify({'ok': False, 'error': 'スペースURLが必要（https://x.com/i/spaces/...）'}), 400
+    sid = m.group(1)
+    G_sessions['space_id'] = sid
+    asyncio.run_coroutine_threadsafe(join_space(G_client, G_track, sid, G_sessions), G_loop)
+    return jsonify({'ok': True, 'space_id': sid})
+
+
+@api_app.route('/api/leave', methods=['POST'])
+def api_leave():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    async def _leave():
+        if G_sessions.get('session'):
+            try:
+                await G_sessions['session'].close()
+            except Exception:
+                pass
+            G_sessions['session'] = None
+            G_sessions['space_id'] = None
+    run_coro(_leave())
+    return jsonify({'ok': True})
+
+
+@api_app.route('/api/history')
+def api_history():
+    if not api_auth_ok():
+        return jsonify({'ok': False, 'error': 'unauthorized'}), 401
+    hist = load_history()
+    return jsonify({'ok': True, 'history': hist[-20:][::-1]})
+
+
+def start_api():
+    api_app.run(host='127.0.0.1', port=CFG.get('api_port', 8768), threaded=True)
+
+
 async def main():
+    global G_client, G_track, G_sessions, G_queue, G_loop
+    G_loop = asyncio.get_event_loop()
     client = Client(language='ja')
-    cookies = json.load(open(CFG['cookie_path'], encoding='utf-8'))
+    if CFG.get('cookie_json'):
+        cookies = json.loads(CFG['cookie_json'])
+    else:
+        cookies = json.load(open(CFG['cookie_path'], encoding='utf-8'))
     client.set_cookies(cookies)
     uid = await client.user_id()
     print('✅ ログインOK user_id:', uid)
+    G_client = client
 
     if '【' in CFG['screen_name']:
         print('❌ config.json の screen_name に bot の @名（@なし）を設定してね！')
         return
 
-    track = SongTrack()
-    sessions = {'session': None, 'space_id': None, 'current': None, 'pos': 0}
-    queue = Queue(CFG['queue_file'])
+    G_track = SongTrack()
+    G_sessions = {'session': None, 'space_id': None, 'current': None, 'pos': 0}
+    G_queue = Queue(CFG['queue_file'])
+
+    # Web APIサーバーを別スレッドで起動（サイト制御用）
+    threading.Thread(target=start_api, daemon=True).start()
+    print(f'🌐 APIサーバー起動: http://127.0.0.1:{CFG.get("api_port", 8768)}（トークン: {"設定済み" if API_TOKEN else "なし"}）')
 
     try:
-        await asyncio.gather(
-            monitor_mentions(client, queue, track, sessions),
-            play_loop(client, queue, track, sessions),
-        )
+        # リプ受付（メンション監視）は廃止・再生ループのみ
+        await play_loop(client, G_queue, G_track, G_sessions)
     except (KeyboardInterrupt, asyncio.CancelledError):
         pass
     finally:

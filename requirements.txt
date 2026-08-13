@@ -1,5 +1,11 @@
-aiortc==1.15.0
-av>=12
+flask>=3.0
 yt-dlp
-httpx
-websockets
+aiortc
+av
+numpy
+httpx[socks]>=0.26
+filetype
+beautifulsoup4
+pyotp
+lxml
+webvtt-py

@@ -1,0 +1,17 @@
+# X版Jockie Music bot（Coolify用・サイト制御APIサーバー）
+FROM python:3.11-slim AS base
+WORKDIR /app
+
+# twifork（X APIライブラリ）を取得
+RUN apt-get update && apt-get install -y --no-install-recommends git ffmpeg && rm -rf /var/lib/apt/lists/*
+RUN git clone --depth 1 https://github.com/PawiX25/twifork /twifork
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY bot.py player.py song_queue.py config.example.json ./
+RUN cp config.example.json config.json && mkdir -p data
+
+ENV PYTHONPATH=/twifork
+EXPOSE 8768
+CMD ["python", "bot.py"]
