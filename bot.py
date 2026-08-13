@@ -686,7 +686,9 @@ def api_history():
 
 
 def start_api():
-    api_app.run(host='127.0.0.1', port=CFG.get('api_port', 8768), threaded=True)
+    # Docker（Coolify）内では0.0.0.0でバインド（API_HOST環境変数で切替）
+    host = os.environ.get('API_HOST', '127.0.0.1')
+    api_app.run(host=host, port=CFG.get('api_port', 8768), threaded=True)
 
 
 async def main():
