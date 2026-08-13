@@ -1,13 +1,13 @@
 // トップページ共通コンポーネント（[locale]版・ルート版の両方から使用）
 import Link from "next/link";
 import { getDict } from "@/lib/i18n";
-import { categoryCounts } from "@/lib/commands";
+import { xCategoryCounts } from "@/lib/commands";
 
 const BASE = "https://maebahesioru.github.io/xjockiemusic";
 
 export default function HomeContent({ locale }: { locale: string }) {
   const dict = getDict(locale);
-  const counts = categoryCounts();
+  const counts = xCategoryCounts();
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   const home = locale === "ja" ? "/" : `/${locale}`;
   const langAttr = locale === "ja" ? "ja" : locale === "zh" ? "zh" : "en";
