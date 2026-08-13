@@ -105,8 +105,55 @@ async def join_space(client, track, space_id, sessions=None):
 
 
 # ---------------------------------------------------------------- メンション監視
+async def process_tweet(client, tweet, queue, track, sessions, processed):
+    """1ツイートを処理（スペース特定・自動参加・コマンド実行）"""
+    tid = str(tweet.id)
+    if tid in processed:
+        return
+    processed.add(tid)
+    text = (tweet.text or '')
+    user = getattr(tweet.user, 'screen_name', None) or '匿名'
+    print(f'[tweet] @{user}: {text[:60]}')
+
+    # スペースIDの特定: リプライ先ツイート → メンション内URL
+    space_id = None
+    space_tweet_id = None
+    reply_to = getattr(tweet, 'in_reply_to_status_id', None)
+    if reply_to:
+        try:
+            parent = await client.get_tweet_by_id(reply_to)
+            m = SPACE_URL_RE.search(parent.text or '')
+            if m:
+                space_id = m.group(1)
+                space_tweet_id = reply_to
+                print(f'[space] リプライ先からスペース特定: {space_id}')
+        except Exception as e:
+            print('リプライ先確認エラー:', str(e)[:100])
+    if not space_id:
+        m = SPACE_URL_RE.search(text)
+        if m:
+            space_id = m.group(1)
+            print(f'[space] メンション内URLからスペース特定: {space_id}')
+
+    # スペース参加（初回のみ・スペースツイートIDを記録）
+    if space_id and (not sessions.get('space_id') or sessions['space_id'] != space_id):
+        sessions['space_id'] = space_id
+        sessions['space_tweet_id'] = space_tweet_id or sessions.get('space_tweet_id')
+        asyncio.create_task(join_space(client, track, space_id, sessions))
+        await post_reply(client, tweet.id, '🎙️ スペースに参加します！スピーカーリクエスト送信（ホストの承認待ち）')
+
+    # コマンド処理
+    try:
+        await handle_command(client, tweet, text, user, queue, track, sessions)
+    except Exception as e:
+        print('コマンド処理エラー:', e)
+
+
 async def monitor_mentions(client, queue, track, sessions):
-    """メンション監視: スペース特定 → 参加 / 全コマンド処理"""
+    """3ソースでメンションを監視:
+    1. 検索（get_user_mentions・シャドウバンは拾えない）
+    2. 通知欄（get_notifications('Mentions')・フォールバック）
+    3. 参加中スペースのツイートのリプ欄（conversation_ids・フォールバック・確実）"""
     processed = set()
     pf = CFG['processed_file']
     if os.path.exists(pf):
@@ -116,54 +163,57 @@ async def monitor_mentions(client, queue, track, sessions):
             pass
 
     while True:
+        rate_limited = False
+        # 1. 検索ベース
         try:
             mentions = await client.get_user_mentions(CFG['screen_name'], count=20)
             for tweet in mentions:
-                tid = str(tweet.id)
-                if tid in processed:
-                    continue
-                processed.add(tid)
-                text = (tweet.text or '')
-                user = getattr(tweet.user, 'screen_name', None) or '匿名'
-                print(f'[mention] @{user}: {text[:60]}')
+                await process_tweet(client, tweet, queue, track, sessions, processed)
+        except Exception as e:
+            print('検索エラー:', e)
+            if '429' in str(e) or 'Rate limit' in str(e):
+                rate_limited = True
 
-                # スペースIDの特定: リプライ先ツイート → メンション内URL
-                space_id = None
-                reply_to = getattr(tweet, 'in_reply_to_status_id', None)
-                if reply_to:
+        # 2. 通知欄（フォールバック・シャドウバン対策）
+        try:
+            notifs = await client.get_notifications('Mentions', count=40)
+            for n in notifs:
+                t = getattr(n, 'tweet', None)
+                if t is not None:
+                    await process_tweet(client, t, queue, track, sessions, processed)
+        except Exception as e:
+            print('通知エラー:', e)
+            if '429' in str(e) or 'Rate limit' in str(e):
+                rate_limited = True
+
+        # 3. 参加中スペースのツイートのリプ欄（フォールバック・確実）
+        try:
+            stid = sessions.get('space_tweet_id')
+            if stid:
+                parent = await client.get_tweet_by_id(stid)
+                for rid in (parent.conversation_ids or []):
+                    if str(rid) in processed:
+                        continue
                     try:
-                        parent = await client.get_tweet_by_id(reply_to)
-                        m = SPACE_URL_RE.search(parent.text or '')
-                        if m:
-                            space_id = m.group(1)
-                            print(f'[space] リプライ先からスペース特定: {space_id}')
-                    except Exception as e:
-                        print('リプライ先確認エラー:', str(e)[:100])
-                if not space_id:
-                    m = SPACE_URL_RE.search(text)
-                    if m:
-                        space_id = m.group(1)
-                        print(f'[space] メンション内URLからスペース特定: {space_id}')
+                        rt = await client.get_tweet_by_id(rid)
+                        if rt is not None:
+                            await process_tweet(client, rt, queue, track, sessions, processed)
+                    except Exception:
+                        pass
+        except Exception as e:
+            print('リプ欄エラー:', e)
+            if '429' in str(e) or 'Rate limit' in str(e):
+                rate_limited = True
 
-                # スペース参加（初回のみ）
-                if space_id and (not sessions.get('space_id') or sessions['space_id'] != space_id):
-                    sessions['space_id'] = space_id
-                    asyncio.create_task(join_space(client, track, space_id, sessions))
-                    await post_reply(client, tweet.id, '🎙️ スペースに参加します！スピーカーリクエスト送信（ホストの承認待ち）')
-
-                # コマンド処理
-                try:
-                    await handle_command(client, tweet, text, user, queue, track, sessions)
-                except Exception as e:
-                    print('コマンド処理エラー:', e)
-
+        try:
             os.makedirs(os.path.dirname(pf), exist_ok=True)
             json.dump(list(processed), open(pf, 'w', encoding='utf-8'), ensure_ascii=False)
         except Exception as e:
-            print('メンション監視エラー:', e)
-            if '429' in str(e) or 'Rate limit' in str(e):
-                await asyncio.sleep(300)  # レート制限は5分バックオフ
-                continue
+            print('保存エラー:', e)
+
+        if rate_limited:
+            print('⏳ レート制限中・5分バックオフ')
+            await asyncio.sleep(300)
         await asyncio.sleep(CFG['poll_interval'])
 
 
