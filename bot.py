@@ -9,6 +9,7 @@ import asyncio
 import json
 import os
 import re
+import secrets
 import sys
 import time
 import unicodedata
@@ -44,6 +45,45 @@ def load_cfg():
 CFG = load_cfg()
 
 SPACE_URL_RE = re.compile(r'x\.com/i/spaces/([0-9A-Za-z]+)')
+SPACE_TOKENS_FILE = os.path.join(os.path.dirname(__file__), 'data', 'space_tokens.json')
+
+
+def load_space_tokens():
+    """スペーストークン（space_id→token）を読み込み"""
+    if os.path.exists(SPACE_TOKENS_FILE):
+        try:
+            return json.load(open(SPACE_TOKENS_FILE, encoding='utf-8'))
+        except Exception:
+            pass
+    return {}
+
+
+def save_space_tokens(tokens):
+    try:
+        os.makedirs(os.path.dirname(SPACE_TOKENS_FILE), exist_ok=True)
+        json.dump(tokens, open(SPACE_TOKENS_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    except Exception:
+        pass
+
+
+def get_space_token(space_id):
+    """スペース専用のパネルトークンを取得（なければ生成）"""
+    tokens = load_space_tokens()
+    if space_id in tokens:
+        return tokens[space_id]
+    token = secrets.token_urlsafe(16)
+    tokens[space_id] = token
+    save_space_tokens(tokens)
+    return token
+
+
+def resolve_space_token(token):
+    """トークンからスペースIDを解決（なければNone）"""
+    tokens = load_space_tokens()
+    for sid, tok in tokens.items():
+        if tok == token:
+            return sid
+    return None
 HISTORY_FILE = os.path.join(os.path.dirname(__file__), 'data', 'history.json')
 
 
@@ -128,18 +168,18 @@ async def join_space(client, track, space_id, sessions=None):
 
 # ---------------------------------------------------------------- メンション監視
 async def process_tweet(client, tweet, queue, track, sessions, processed):
-    """1ツイートを処理（スペース特定・自動参加・コマンド実行）"""
+    """メンション検知→スペース特定→コントロールパネルURLをリプで返す"""
     tid = str(tweet.id)
     if tid in processed:
         return
-    processed.add(tid)
     text = (tweet.text or '')
+    if 'JockieMusicPort' not in text and 'jockiemusicport' not in text.lower():
+        return
     user = getattr(tweet.user, 'screen_name', None) or '匿名'
     print(f'[tweet] @{user}: {text[:60]}')
 
     # スペースIDの特定: リプライ先ツイート → メンション内URL
     space_id = None
-    space_tweet_id = None
     reply_to = getattr(tweet, 'in_reply_to_status_id', None)
     if reply_to:
         try:
@@ -147,7 +187,6 @@ async def process_tweet(client, tweet, queue, track, sessions, processed):
             m = SPACE_URL_RE.search(parent.text or '')
             if m:
                 space_id = m.group(1)
-                space_tweet_id = reply_to
                 print(f'[space] リプライ先からスペース特定: {space_id}')
         except Exception as e:
             print('リプライ先確認エラー:', str(e)[:100])
@@ -156,19 +195,20 @@ async def process_tweet(client, tweet, queue, track, sessions, processed):
         if m:
             space_id = m.group(1)
             print(f'[space] メンション内URLからスペース特定: {space_id}')
+    if not space_id:
+        return  # スペースが特定できなければ何もしない
 
-    # スペース参加（初回のみ・スペースツイートIDを記録）
-    if space_id and (not sessions.get('space_id') or sessions['space_id'] != space_id):
+    processed.add(tid)
+
+    # スペース参加（初回のみ）
+    if not sessions.get('space_id') or sessions['space_id'] != space_id:
         sessions['space_id'] = space_id
-        sessions['space_tweet_id'] = space_tweet_id or sessions.get('space_tweet_id')
         asyncio.create_task(join_space(client, track, space_id, sessions))
-        await post_reply(client, tweet.id, '🎙️ スペースに参加します！スピーカーリクエスト送信（ホストの承認待ち）')
 
-    # コマンド処理
-    try:
-        await handle_command(client, tweet, text, user, queue, track, sessions)
-    except Exception as e:
-        print('コマンド処理エラー:', e)
+    # スペース専用コントロールパネルURLを発行してリプで返す
+    token = get_space_token(space_id)
+    url = f'https://jockiemusic.hikamer.f5.si/control/{token}'
+    await post_reply(client, tweet.id, f'🎛️ このスペースのコントロールパネル: {url}')
 
 
 async def monitor_mentions(client, queue, track, sessions):
@@ -529,10 +569,15 @@ API_TOKEN = CFG.get('api_token', '')
 
 
 def api_auth_ok():
-    if not API_TOKEN:
-        return True
+    """APIキー or スペーストークンで認証"""
     auth = request.headers.get('Authorization', '')
-    return auth == f'Bearer {API_TOKEN}'
+    token = auth.replace('Bearer ', '').strip()
+    if API_TOKEN and token == API_TOKEN:
+        return True
+    # スペーストークン（/control/{token}用・発行済みトークンならOK）
+    if resolve_space_token(token):
+        return True
+    return False
 
 
 async def _noop():
@@ -652,10 +697,17 @@ def api_join():
         return jsonify({'ok': False, 'error': 'unauthorized'}), 401
     d = request.get_json(force=True, silent=True) or {}
     url = (d.get('space_url') or '').strip()
-    m = SPACE_URL_RE.search(url)
-    if not m:
-        return jsonify({'ok': False, 'error': 'スペースURLが必要（https://x.com/i/spaces/...）'}), 400
-    sid = m.group(1)
+    token = (d.get('token') or '').strip()
+    sid = None
+    if token:
+        sid = resolve_space_token(token)
+        if not sid:
+            return jsonify({'ok': False, 'error': 'トークンが無効'}), 400
+    else:
+        m = SPACE_URL_RE.search(url)
+        if not m:
+            return jsonify({'ok': False, 'error': 'スペースURLが必要（https://x.com/i/spaces/...）'}), 400
+        sid = m.group(1)
     G_sessions['space_id'] = sid
     asyncio.run_coroutine_threadsafe(join_space(G_client, G_track, sid, G_sessions), G_loop)
     return jsonify({'ok': True, 'space_id': sid})
@@ -717,8 +769,11 @@ async def main():
     print(f'🌐 APIサーバー起動: http://127.0.0.1:{CFG.get("api_port", 8768)}（トークン: {"設定済み" if API_TOKEN else "なし"}）')
 
     try:
-        # リプ受付（メンション監視）は廃止・再生ループのみ
-        await play_loop(client, G_queue, G_track, G_sessions)
+        # メンション監視（パネルURL返却用）+ 再生ループ
+        await asyncio.gather(
+            monitor_mentions(client, G_queue, G_track, G_sessions),
+            play_loop(client, G_queue, G_track, G_sessions),
+        )
     except (KeyboardInterrupt, asyncio.CancelledError):
         pass
     finally:

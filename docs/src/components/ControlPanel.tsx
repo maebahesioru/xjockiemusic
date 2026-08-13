@@ -1,6 +1,7 @@
 "use client";
 
-// コントロールパネル（サイト制御方式・APIキーでbotを操作）
+// コントロールパネル（サイト制御方式・APIキー or スペーストークンでbotを操作）
+// トークン付きURL: /control?t=TOKEN（スペース専用パネル・メンションで発行）
 import { useCallback, useEffect, useState } from "react";
 
 const API_BASE = "https://jockiemusic.hikamer.f5.si/api";
@@ -37,9 +38,19 @@ export default function ControlPage() {
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fromUrl, setFromUrl] = useState(false);
 
   useEffect(() => {
-    setApiKey(localStorage.getItem(API_KEY_STORAGE) || "");
+    // URLの ?t=TOKEN からスペーストークンを取得（メンションで発行されたパネルURL）
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("t");
+    if (t) {
+      setApiKey(t);
+      setFromUrl(true);
+      localStorage.setItem(API_KEY_STORAGE, t);
+    } else {
+      setApiKey(localStorage.getItem(API_KEY_STORAGE) || "");
+    }
   }, []);
 
   const refresh = useCallback(async () => {
@@ -98,7 +109,14 @@ export default function ControlPage() {
   }
 
   async function doJoin() {
-    await doCall("/join", { space_url: spaceUrl.trim() }, "スペース参加を開始しました");
+    if (fromUrl) {
+      // トークンモード: URLのトークンでそのスペースに参加
+      await doCall("/join", { token: apiKey }, "スペース参加を開始しました");
+    } else if (spaceUrl.trim()) {
+      await doCall("/join", { space_url: spaceUrl.trim() }, "スペース参加を開始しました");
+    } else {
+      setErr("スペースURLを入力してください");
+    }
   }
 
   const btn =
@@ -113,21 +131,29 @@ export default function ControlPage() {
         botをサイトから操作（リプ方式は廃止）。再生・キュー・スペース接続をここで制御します。
       </p>
 
-      {/* APIキー */}
+      {/* APIキー / トークン */}
       <div className="mb-6 rounded-lg border border-neutral-800 bg-[#1d1925] p-4">
-        <div className="mb-2 text-sm font-semibold text-white">🔑 APIキー</div>
-        <div className="flex gap-2">
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="APIキーを入力"
-            className="flex-1 rounded-lg border border-neutral-700 bg-black/30 px-4 py-2 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-jockie"
-          />
-          <button onClick={saveKey} className={btn}>
-            保存
-          </button>
+        <div className="mb-2 text-sm font-semibold text-white">
+          {fromUrl ? "🔑 スペーストークン" : "🔑 APIキー"}
         </div>
+        {fromUrl ? (
+          <div className="text-sm text-green-400">
+            ✅ このスペース専用のパネルです（トークンはURLに含まれています）
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <input
+              type="password"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              placeholder="APIキーを入力"
+              className="flex-1 rounded-lg border border-neutral-700 bg-black/30 px-4 py-2 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-jockie"
+            />
+            <button onClick={saveKey} className={btn}>
+              保存
+            </button>
+          </div>
+        )}
         {err && <div className="mt-2 text-sm text-red-400">⚠️ {err}</div>}
         {msg && <div className="mt-2 text-sm text-green-400">✅ {msg}</div>}
       </div>
@@ -209,18 +235,24 @@ export default function ControlPage() {
       {/* スペース */}
       <div className="mb-6 rounded-lg border border-neutral-800 bg-[#1d1925] p-4">
         <div className="mb-3 text-sm font-semibold text-white">🎙️ スペース</div>
-        <div className="mb-3 flex gap-2">
-          <input
-            type="text"
-            value={spaceUrl}
-            onChange={(e) => setSpaceUrl(e.target.value)}
-            placeholder="スペースURL（https://x.com/i/spaces/...）"
-            className="flex-1 rounded-lg border border-neutral-700 bg-black/30 px-4 py-2 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-jockie"
-          />
+        {fromUrl ? (
           <button onClick={doJoin} disabled={loading} className={btn}>
-            参加
+            🎙️ このスペースに参加
           </button>
-        </div>
+        ) : (
+          <div className="mb-3 flex gap-2">
+            <input
+              type="text"
+              value={spaceUrl}
+              onChange={(e) => setSpaceUrl(e.target.value)}
+              placeholder="スペースURL（https://x.com/i/spaces/...）"
+              className="flex-1 rounded-lg border border-neutral-700 bg-black/30 px-4 py-2 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-jockie"
+            />
+            <button onClick={doJoin} disabled={loading} className={btn}>
+              参加
+            </button>
+          </div>
+        )}
         <button onClick={() => doCall("/leave", {}, "離脱")} disabled={loading} className={btnGray}>
           👋 離脱
         </button>
