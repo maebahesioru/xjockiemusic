@@ -1,0 +1,40 @@
+// コマンドデータの型定義
+export interface CommandOption {
+  name: string;
+  description: string;
+}
+
+export interface Command {
+  command: string;
+  aliases: string[];
+  usage: string;
+  description: string;
+  options: CommandOption[];
+  examples: string[];
+}
+
+export interface CommandCategory {
+  name: string;
+  description: string;
+  commands: Command[];
+  subCategories: unknown[];
+}
+
+export interface CommandsData {
+  categories: CommandCategory[];
+  unknown: Command[];
+}
+
+import data from "@/data/commands.json";
+
+export const commandsData = data as unknown as CommandsData;
+
+// カテゴリごとのコマンド数
+export function categoryCounts(): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const cat of commandsData.categories) {
+    counts[cat.name] = cat.commands.length;
+  }
+  counts["unknown"] = commandsData.unknown.length;
+  return counts;
+}

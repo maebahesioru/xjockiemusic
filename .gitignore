@@ -1,0 +1,25 @@
+# ⛔ シークレット・実行時データ（絶対にコミットしない）
+config.json
+data/
+*.log
+
+# テスト・認証情報を含むファイル
+test_*.py
+
+# 一時取得ファイル
+jockie_commands.html
+jockie_api_commands.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Docs (Next.js)
+docs/node_modules/
+docs/.next/
+docs/out/
+docs/.env*
+docs/*.tsbuildinfo

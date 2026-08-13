@@ -1,0 +1,5 @@
+aiortc==1.15.0
+av>=12
+yt-dlp
+httpx
+websockets

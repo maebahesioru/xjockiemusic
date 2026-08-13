@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jockie: #e04a5a;
+  --color-jockie-dark: #812d33;
+}

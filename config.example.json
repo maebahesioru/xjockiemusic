@@ -1,0 +1,11 @@
+{
+  "cookie_path": "path/to/your/cookies.json",
+  "screen_name": "YourBotScreenName",
+  "space_title": "🎵 X版Jockie Music",
+  "queue_file": "data/queue.json",
+  "audio_cache": "data/audio_cache",
+  "processed_file": "data/processed_mentions.json",
+  "poll_interval": 90,
+  "max_queue": 50,
+  "twifork_path": "path/to/twifork"
+}
