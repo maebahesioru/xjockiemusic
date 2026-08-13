@@ -11,6 +11,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 
 sys.path.insert(0, r'C:\Users\maeba\AppData\Local\Temp\twifork')
 from twikit import Client
@@ -221,44 +222,51 @@ async def monitor_mentions(client, queue, track, sessions):
         await asyncio.sleep(CFG['poll_interval'])
 
 
-# オプション解析: 「!play insert 曲名」「!play now 曲名」「!play sort:title 曲名」形式
+# オプション解析: 「!play insert:true 曲名」「!play now:true 曲名」「!play sort:title 曲名」形式
+# 全角「！」「：」も半角に正規化して判定（NFKC）
 OPTION_NAMES = {'insert', 'now', 'remove', 'shuffle', 'reverse', 'search'}
 OPTION_VALUES = {'sort', 'start', 'end', 'search-type'}
 
 
-def parse_options(rest):
-    """コマンドの残り文字列からオプションとクエリを分離"""
+def parse_options(rest_norm, body_orig):
+    """正規化済みrestからオプションを判定し、元の本文からクエリを切り出す"""
     opts = {}
-    tokens = rest.split()
+    tokens_norm = rest_norm.split()
+    tokens_orig = body_orig.split()
     qi = 0
-    for i, t in enumerate(tokens):
-        if ':' in t:
-            name, _, val = t.partition(':')
+    for i, (tn, _to) in enumerate(zip(tokens_norm, tokens_orig)):
+        if ':' in tn:
+            name, _, val = tn.partition(':')
             if name.lower() in OPTION_VALUES:
                 opts[name.lower()] = val
                 qi = i + 1
+            elif name.lower() in OPTION_NAMES:
+                # 値付きフラグ（insert:true 等）
+                opts[name.lower()] = True
+                qi = i + 1
             else:
                 break
-        elif t in OPTION_NAMES:
-            opts[t] = True
+        elif tn in OPTION_NAMES:
+            opts[tn] = True
             qi = i + 1
         else:
             break
-    return opts, ' '.join(tokens[qi:])
+    query = ' '.join(tokens_orig[qi:])
+    return opts, query
 
 
 async def handle_command(client, tweet, text, user, queue, track, sessions):
     """メンションのコマンドを処理（!あり/!なし両対応）"""
-    # メンション部分を除去して、先頭のコマンドワードを抽出
+    # メンション部分を除去して、先頭のコマンドワードを抽出（全角！：もNFKCで半角化）
     body = re.sub(r'@\w+', '', text).strip()
-    low = body.lower()
+    low = unicodedata.normalize('NFKC', body).lower()
     m = re.match(r'!?\s*([a-z0-9]+)', low)
     cmd = m.group(1) if m else ''
     rest = low[m.end():].strip() if m else ''
 
     # --- Playback系 ---
     if cmd in ('play', 'p'):
-        opts, query = parse_options(rest)
+        opts, query = parse_options(rest, re.sub(r'^!?\S+\s*', '', body))
         if not query:
             await post_reply(client, tweet.id, '🎵 曲名かURLを「play 曲名」で送ってね！（オプション: insert / now）')
             return

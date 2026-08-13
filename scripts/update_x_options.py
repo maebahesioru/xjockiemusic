@@ -8,11 +8,11 @@ DATA = os.path.join(BASE, 'docs', 'src', 'data', 'commands.json')
 
 X_OPTIONS = {
     'play': [
-        {'name': 'insert', 'description': 'Insert as the next track. Usage: !play insert <song>', 'ja': '次の曲として挿入します。例: !play insert 曲名'},
-        {'name': 'now', 'description': 'Play right away. Usage: !play now <song>', 'ja': 'すぐに再生します。例: !play now 曲名'},
+        {'name': 'insert:true', 'description': 'Insert as the next track. Usage: !play insert:true <song>', 'ja': '次の曲として挿入します。例: !play insert:true 曲名'},
+        {'name': 'now:true', 'description': 'Play right away. Usage: !play now:true <song>', 'ja': 'すぐに再生します。例: !play now:true 曲名'},
     ],
     'insert': [
-        {'name': 'now', 'description': 'Play right away. Usage: !insert now <song>', 'ja': 'すぐに再生します。例: !insert now 曲名'},
+        {'name': 'now:true', 'description': 'Play right away. Usage: !insert now:true <song>', 'ja': 'すぐに再生します。例: !insert now:true 曲名'},
     ],
     'pause': [],
     'resume': [],

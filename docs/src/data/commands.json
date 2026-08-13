@@ -335,14 +335,14 @@
      "usage": "play <search term | url>",
      "options": [
       {
-       "name": "insert",
-       "description": "Insert as the next track. Usage: !play insert <song>",
-       "ja": "次の曲として挿入します。例: !play insert 曲名"
+       "name": "insert:true",
+       "description": "Insert as the next track. Usage: !play insert:true <song>",
+       "ja": "次の曲として挿入します。例: !play insert:true 曲名"
       },
       {
-       "name": "now",
-       "description": "Play right away. Usage: !play now <song>",
-       "ja": "すぐに再生します。例: !play now 曲名"
+       "name": "now:true",
+       "description": "Play right away. Usage: !play now:true <song>",
+       "ja": "すぐに再生します。例: !play now:true 曲名"
       }
      ],
      "description": "Queue a track or playlist from a search term or url",
@@ -824,9 +824,9 @@
      "usage": "insert <search term | url>",
      "options": [
       {
-       "name": "now",
-       "description": "Play right away. Usage: !insert now <song>",
-       "ja": "すぐに再生します。例: !insert now 曲名"
+       "name": "now:true",
+       "description": "Play right away. Usage: !insert now:true <song>",
+       "ja": "すぐに再生します。例: !insert now:true 曲名"
       }
      ],
      "description": "Insert a track right after the one that is currently playing",
