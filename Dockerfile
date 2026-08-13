@@ -1,9 +1,9 @@
 # X版Jockie Music Docサイト（Next.js静的エクスポート）をnginxで配信
 FROM node:22-alpine AS build
 WORKDIR /app
-RUN corepack enable
+RUN npm install -g pnpm
 COPY docs/package.json docs/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 COPY docs/ ./
 RUN pnpm build
 
