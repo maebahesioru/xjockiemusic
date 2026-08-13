@@ -4,20 +4,25 @@ import { commandsData, categoryCounts } from "@/lib/commands";
 
 const BASE = "https://maebahesioru.github.io/xjockiemusic";
 
-export default function RootHomePage() {
-  // ルート / は日本語版（canonicalも / に統一）
-  const locale = "ja";
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const dict = getDict(locale);
   const counts = categoryCounts();
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
+  const home = locale === "ja" ? "/" : `/${locale}`;
+  const langAttr = locale === "ja" ? "ja" : locale === "zh" ? "zh" : "en";
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: dict.siteName,
-    url: `${BASE}/`,
+    url: `${BASE}${home}`,
     description: dict.description,
-    inLanguage: "ja",
+    inLanguage: langAttr,
   };
 
   return (
@@ -34,7 +39,7 @@ export default function RootHomePage() {
         <p className="mb-6 text-sm text-neutral-400">{dict.heroDesc2}</p>
         <div className="flex justify-center gap-3">
           <Link
-            href="/commands"
+            href={`${home}commands`}
             className="rounded-lg bg-jockie px-5 py-2.5 font-semibold text-white hover:bg-jockie-dark"
           >
             {dict.commandsButton.replace("{n}", String(total))}
@@ -91,7 +96,7 @@ export default function RootHomePage() {
           {Object.entries(counts).map(([name, n]) => (
             <Link
               key={name}
-              href="/commands"
+              href={`${home}commands`}
               className="rounded-lg border border-neutral-800 bg-[#1d1925] p-4 hover:border-jockie"
             >
               <div className="font-semibold text-white">{name}</div>

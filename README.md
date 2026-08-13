@@ -1,5 +1,7 @@
 # 🎵 X版Jockie Music
 
+[日本語](README.md) | [English](README.en.md) | [中文](README.zh.md)
+
 X (Twitter) の **スペースで動く音楽リクエストbot**。
 Jockie Music（Discord）の非公式Xポートです。
 
@@ -10,6 +12,7 @@ Jockie Music（Discord）の非公式Xポートです。
 - 🎙️ **メンション方式** — スペースチャット（参加者しか見えない）ではなく、**スペースURLのツイートのリプにメンション**でコマンドを受け付け
 - 🤝 **スピリク方式** — botはスペースを作らない。人間のスペースに参加 → スピーカーリクエスト → ホスト承認 → 音声出力
 - 🎵 **Jockie Music互換コマンド** — play / skip / pause / shuffle / queue など30+コマンド
+- 🔍 **3ソースのメンション監視** — 検索 + 通知欄 + スペースツイートのリプ欄（シャドウバン対策）
 - 📊 **再生履歴** — 最近再生した曲の履歴を保持
 - 🐳 **検証済み技術** — サンサンサンデー放送（29時間・514曲）で実証したWebRTC音声出力を応用
 
@@ -36,7 +39,7 @@ Jockie Music（Discord）の非公式Xポートです。
 | Information | `queue` / `np` / `nextup` / `recent` / `stats` |
 | 管理 | `remove` / `clear` / `help` |
 
-詳細は [docs](docs/) のコマンド一覧ページ（`pnpm --dir docs dev` で起動）または [X版Jockie Music Docs](https://www.jockiemusic.com/commands) を参照。
+詳細は [docs](docs/) のコマンド一覧ページ（`pnpm --dir docs dev` で起動）または [X版Jockie Music Docs](https://maebahesioru.github.io/xjockiemusic/) を参照。
 
 ## 🔧 セットアップ
 
@@ -81,7 +84,7 @@ python bot.py
 ├── song_queue.py     # キュー管理（JSON永続化・shuffle/move/swap等）
 ├── config.example.json
 ├── requirements.txt
-└── docs/             # ドキュメントサイト（Next.js）
+└── docs/             # ドキュメントサイト（Next.js・多言語対応）
 ```
 
 ## ⚠️ 注意

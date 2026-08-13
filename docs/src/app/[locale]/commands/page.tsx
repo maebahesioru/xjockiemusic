@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { commandsData, type Command } from "@/lib/commands";
+import { getDict } from "@/lib/i18n";
 
-function CommandRow({ cmd }: { cmd: Command }) {
+function CommandRow({ cmd, dict }: { cmd: Command; dict: ReturnType<typeof getDict> }) {
   const [open, setOpen] = useState(false);
-  const name = cmd.command || "(未定義)";
+  const name = cmd.command || "(undefined)";
   const usage = cmd.usage || name;
   return (
     <div className="border-b border-neutral-800 last:border-b-0">
@@ -19,7 +20,7 @@ function CommandRow({ cmd }: { cmd: Command }) {
           </code>
           {cmd.aliases?.length > 0 && (
             <span className="text-xs text-neutral-500">
-              alias: {cmd.aliases.join(", ")}
+              {dict.alias}: {cmd.aliases.join(", ")}
             </span>
           )}
         </div>
@@ -32,13 +33,13 @@ function CommandRow({ cmd }: { cmd: Command }) {
           )}
           {usage && (
             <p className="text-sm">
-              <span className="text-neutral-500">使い方: </span>
+              <span className="text-neutral-500">{dict.usage}: </span>
               <code className="font-mono text-neutral-300">!{usage}</code>
             </p>
           )}
           {cmd.options && cmd.options.length > 0 && (
             <div>
-              <div className="mb-1 text-xs text-neutral-500">オプション:</div>
+              <div className="mb-1 text-xs text-neutral-500">{dict.options}:</div>
               {cmd.options.map((o) => (
                 <div key={o.name} className="text-sm text-neutral-400">
                   <code className="font-mono text-jockie">{o.name}</code>{" "}
@@ -49,9 +50,14 @@ function CommandRow({ cmd }: { cmd: Command }) {
           )}
           {cmd.examples && cmd.examples.length > 0 && (
             <div>
-              <div className="mb-1 text-xs text-neutral-500">例:</div>
+              <div className="mb-1 text-xs text-neutral-500">
+                {dict.examplesLabel}:
+              </div>
               {cmd.examples.map((e, i) => (
-                <code key={i} className="block font-mono text-xs text-neutral-400">
+                <code
+                  key={i}
+                  className="block font-mono text-xs text-neutral-400"
+                >
                   !{e}
                 </code>
               ))}
@@ -63,9 +69,22 @@ function CommandRow({ cmd }: { cmd: Command }) {
   );
 }
 
-export default function CommandsPage() {
+export default function CommandsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const [loc, setLoc] = useState("ja");
   const [query, setQuery] = useState("");
   const [catFilter, setCatFilter] = useState<string>("all");
+
+  // クライアントではURLからlocaleを読む
+  useEffect(() => {
+    const m = window.location.pathname.match(/^\/(en|zh)\b/);
+    setLoc(m ? m[1] : "ja");
+  }, []);
+
+  const dict = getDict(loc);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -106,20 +125,16 @@ export default function CommandsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="mb-2 text-3xl font-bold text-white">
-        📋 コマンド一覧（{total}個）
+        {dict.commandsTitle.replace("{n}", String(total))}
       </h1>
-      <p className="mb-6 text-sm text-neutral-400">
-        Jockie Music公式コマンドをX版向けに移植した一覧です。
-        <br />
-        スペースツイートのリプに <code className="text-jockie">@JockieMusicPort !コマンド</code> で送ってね。
-      </p>
+      <p className="mb-6 text-sm text-neutral-400">{dict.commandsDesc}</p>
 
       <div className="mb-6 flex flex-col gap-3 sm:flex-row">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="🔍 コマンド名・説明で検索…"
+          placeholder={dict.searchPlaceholder}
           className="flex-1 rounded-lg border border-neutral-700 bg-[#1d1925] px-4 py-2.5 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-jockie"
         />
         <select
@@ -127,7 +142,7 @@ export default function CommandsPage() {
           onChange={(e) => setCatFilter(e.target.value)}
           className="rounded-lg border border-neutral-700 bg-[#1d1925] px-3 py-2.5 text-sm text-white outline-none focus:border-jockie"
         >
-          <option value="all">すべてのカテゴリ</option>
+          <option value="all">{dict.allCategories}</option>
           {commandsData.categories.map((c) => (
             <option key={c.name} value={c.name}>
               {c.name}
@@ -139,7 +154,7 @@ export default function CommandsPage() {
 
       <div className="space-y-6">
         {filtered.length === 0 && (
-          <p className="text-center text-neutral-500">該当するコマンドがありません</p>
+          <p className="text-center text-neutral-500">{dict.noCommands}</p>
         )}
         {filtered.map((cat) => (
           <section key={cat.name}>
@@ -148,12 +163,17 @@ export default function CommandsPage() {
                 {cat.name}
               </span>
               <span className="text-sm font-normal text-neutral-500">
-                {cat.commands.length}コマンド
+                {cat.commands.length}
+                {dict.commandsUnit}
               </span>
             </h2>
             <div className="overflow-hidden rounded-lg border border-neutral-800 bg-[#1d1925]">
               {cat.commands.map((cmd) => (
-                <CommandRow key={cmd.command || Math.random()} cmd={cmd} />
+                <CommandRow
+                  key={cmd.command || Math.random()}
+                  cmd={cmd}
+                  dict={dict}
+                />
               ))}
             </div>
           </section>
