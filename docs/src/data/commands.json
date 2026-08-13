@@ -335,69 +335,14 @@
      "usage": "play <search term | url>",
      "options": [
       {
-       "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
-       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
-      },
-      {
-       "name": "start",
-       "description": "Make the track start at the specified time",
-       "ja": "指定した時間から再生を開始"
-      },
-      {
-       "name": "end",
-       "description": "Make the track end at the specified time",
-       "ja": "指定した時間で再生を終了"
-      },
-      {
-       "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist",
-       "ja": "Spotifyプレイリストの読み込むページを選択"
-      },
-      {
-       "name": "shuffle",
-       "description": "Shuffle the playlist before adding it",
-       "ja": "追加前にプレイリストをシャッフル"
-      },
-      {
-       "name": "reverse",
-       "description": "Reverse the playlist before adding it",
-       "ja": "追加前にプレイリストを逆順にする"
-      },
-      {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing",
-       "ja": "現在の曲の直後に挿入"
+       "description": "Insert as the next track. Usage: !play insert <song>",
+       "ja": "次の曲として挿入します。例: !play insert 曲名"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away",
-       "ja": "すぐに再生"
-      },
-      {
-       "name": "search",
-       "description": "Display all the search results instead of getting the first",
-       "ja": "最初の1件だけでなく全検索結果を表示"
-      },
-      {
-       "name": "remove",
-       "description": "Remove the track after it has been played",
-       "ja": "再生後に曲をキューから削除"
-      },
-      {
-       "name": "single",
-       "description": "Play the selected track in a playlist and only that track",
-       "ja": "プレイリスト内の選択した曲だけを再生"
-      },
-      {
-       "name": "select",
-       "description": "Similar to `single` but lets you select which track to play",
-       "ja": "singleに似ているが再生する曲を選べる"
-      },
-      {
-       "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
-       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
+       "description": "Play right away. Usage: !play now <song>",
+       "ja": "すぐに再生します。例: !play now 曲名"
       }
      ],
      "description": "Queue a track or playlist from a search term or url",
@@ -879,64 +824,9 @@
      "usage": "insert <search term | url>",
      "options": [
       {
-       "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
-       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
-      },
-      {
-       "name": "start",
-       "description": "Make the track start at the specified time",
-       "ja": "指定した時間から再生を開始"
-      },
-      {
-       "name": "end",
-       "description": "Make the track end at the specified time",
-       "ja": "指定した時間で再生を終了"
-      },
-      {
-       "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist",
-       "ja": "Spotifyプレイリストの読み込むページを選択"
-      },
-      {
-       "name": "shuffle",
-       "description": "Shuffle the playlist before adding it",
-       "ja": "追加前にプレイリストをシャッフル"
-      },
-      {
-       "name": "reverse",
-       "description": "Reverse the playlist before adding it",
-       "ja": "追加前にプレイリストを逆順にする"
-      },
-      {
        "name": "now",
-       "description": "Play the tracks right away",
-       "ja": "すぐに再生"
-      },
-      {
-       "name": "search",
-       "description": "Display all the search results instead of getting the first",
-       "ja": "最初の1件だけでなく全検索結果を表示"
-      },
-      {
-       "name": "remove",
-       "description": "Remove the track after it has been played",
-       "ja": "再生後に曲をキューから削除"
-      },
-      {
-       "name": "single",
-       "description": "Play the selected track in a playlist and only that track",
-       "ja": "プレイリスト内の選択した曲だけを再生"
-      },
-      {
-       "name": "select",
-       "description": "Similar to `single` but lets you select which track to play",
-       "ja": "singleに似ているが再生する曲を選べる"
-      },
-      {
-       "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
-       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
+       "description": "Play right away. Usage: !insert now <song>",
+       "ja": "すぐに再生します。例: !insert now 曲名"
       }
      ],
      "description": "Insert a track right after the one that is currently playing",
@@ -1270,13 +1160,7 @@
      "aliases": [],
      "examples": [],
      "usage": "pause",
-     "options": [
-      {
-       "name": "force",
-       "description": "Force it to pause instead of toggling between pause and resume",
-       "ja": "一時停止/再開の切替でなく強制的に一時停止"
-      }
-     ],
+     "options": [],
      "arguments": [],
      "command": "pause",
      "x": true,
@@ -1469,23 +1353,7 @@
       }
      ],
      "usage": "shuffle <?>",
-     "options": [
-      {
-       "name": "restart",
-       "description": "Restart the queue and skip the currently playing song",
-       "ja": "キューを最初から再生して現在の曲をスキップ"
-      },
-      {
-       "name": "keep-position",
-       "description": "Keep the shuffled position of the currently playing song",
-       "ja": "現在の曲のシャッフル位置を維持"
-      },
-      {
-       "name": "upcoming",
-       "description": "Shuffle the upcoming tracks",
-       "ja": "今後の曲をシャッフル"
-      }
-     ],
+     "options": [],
      "arguments": [
       {
        "name": "?"
@@ -2309,33 +2177,7 @@
       }
      ],
      "usage": "queue <track>",
-     "options": [
-      {
-       "name": "author",
-       "description": "Filter the tracks by an author",
-       "ja": "作者で曲を絞り込む"
-      },
-      {
-       "name": "title",
-       "description": "Filter the tracks by a title",
-       "ja": "タイトルで曲を絞り込む"
-      },
-      {
-       "name": "sort",
-       "description": "Sort the tracks, possible values `title`, `author`, `length`",
-       "ja": "曲を並べ替える（title/author/lengthで指定）"
-      },
-      {
-       "name": "reverse",
-       "description": "Reverse the tracks",
-       "ja": "曲を逆順にする"
-      },
-      {
-       "name": "with-requester",
-       "description": "Include who requested the track",
-       "ja": "リクエストした人を表示"
-      }
-     ],
+     "options": [],
      "description": "Get a list of the full queue, not to be confused with the `upcoming` command which will only show all the tracks after the current one.\n\nGive a track argument to skip to the page it is on, you can use `first`, `last` and `current` as arguments. You can also add `+` or `-` with a following number after the arguments to get a relative track!",
      "arguments": [
       {

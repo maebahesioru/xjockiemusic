@@ -221,6 +221,32 @@ async def monitor_mentions(client, queue, track, sessions):
         await asyncio.sleep(CFG['poll_interval'])
 
 
+# オプション解析: 「!play insert 曲名」「!play now 曲名」「!play sort:title 曲名」形式
+OPTION_NAMES = {'insert', 'now', 'remove', 'shuffle', 'reverse', 'search'}
+OPTION_VALUES = {'sort', 'start', 'end', 'search-type'}
+
+
+def parse_options(rest):
+    """コマンドの残り文字列からオプションとクエリを分離"""
+    opts = {}
+    tokens = rest.split()
+    qi = 0
+    for i, t in enumerate(tokens):
+        if ':' in t:
+            name, _, val = t.partition(':')
+            if name.lower() in OPTION_VALUES:
+                opts[name.lower()] = val
+                qi = i + 1
+            else:
+                break
+        elif t in OPTION_NAMES:
+            opts[t] = True
+            qi = i + 1
+        else:
+            break
+    return opts, ' '.join(tokens[qi:])
+
+
 async def handle_command(client, tweet, text, user, queue, track, sessions):
     """メンションのコマンドを処理（!あり/!なし両対応）"""
     # メンション部分を除去して、先頭のコマンドワードを抽出
@@ -232,16 +258,29 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
 
     # --- Playback系 ---
     if cmd in ('play', 'p'):
-        query = rest
+        opts, query = parse_options(rest)
         if not query:
-            await post_reply(client, tweet.id, '🎵 曲名かURLを「play 曲名」で送ってね！')
+            await post_reply(client, tweet.id, '🎵 曲名かURLを「play 曲名」で送ってね！（オプション: insert / now）')
+            return
+        # 未対応オプションはエラーを返す
+        unsupported = set(opts) - {'insert', 'now'}
+        if unsupported:
+            await post_reply(client, tweet.id, f'❌ 未対応オプション: {" ".join(sorted(unsupported))}（対応: insert / now）')
             return
         if len(queue.list()) >= CFG['max_queue']:
             await post_reply(client, tweet.id, f'❌ キューがいっぱい（最大{CFG["max_queue"]}曲）')
             return
         title, url, dur = await resolve(query)
-        n = queue.add(title, url, user)
-        await post_reply(client, tweet.id, f'✅ {n}曲目に追加: {title}')
+        if opts.get('insert') or opts.get('now'):
+            queue.insert(title, url, user, 0)
+            if opts.get('now'):
+                track.skip()
+                await post_reply(client, tweet.id, f'⚡ すぐ再生: {title}')
+            else:
+                await post_reply(client, tweet.id, f'⏩ 次の曲として挿入: {title}')
+        else:
+            n = queue.add(title, url, user)
+            await post_reply(client, tweet.id, f'✅ {n}曲目に追加: {title}')
 
     elif cmd == 'insert':
         query = rest
