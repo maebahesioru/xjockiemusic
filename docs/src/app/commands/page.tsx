@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import SiteShell from "@/components/SiteShell";
 import { commandsData, type Command } from "@/lib/commands";
 import { getDict } from "@/lib/i18n";
 
@@ -128,6 +129,7 @@ export default function CommandsPage() {
   }, []);
 
   return (
+    <SiteShell dict={getDict("ja")} locale="ja">
     <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="mb-2 text-3xl font-bold text-white">
         {dict.commandsTitle.replace("{n}", String(total))}
@@ -185,5 +187,6 @@ export default function CommandsPage() {
         ))}
       </div>
     </div>
+    </SiteShell>
   );
 }
