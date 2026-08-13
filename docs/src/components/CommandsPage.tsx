@@ -64,7 +64,7 @@ function CommandRow({
               {cmd.options.map((o) => (
                 <div key={o.name} className="text-sm text-neutral-400">
                   <code className="font-mono text-jockie">{o.name}</code>{" "}
-                  {o.description}
+                  {locale === "ja" && o.ja ? o.ja : o.description}
                 </div>
               ))}
             </div>

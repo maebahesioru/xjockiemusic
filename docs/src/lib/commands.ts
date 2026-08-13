@@ -2,6 +2,7 @@
 export interface CommandOption {
   name: string;
   description: string;
+  ja?: string;
 }
 
 export interface Command {

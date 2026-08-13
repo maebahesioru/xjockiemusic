@@ -19,18 +19,20 @@
      "options": [
       {
        "name": "to",
-       "description": "The message id to stop at, this is the last message it will delete starting from the most recent message"
+       "description": "The message id to stop at, this is the last message it will delete starting from the most recent message",
+       "ja": "削除を停止するメッセージID（最新から数えて最後に削除するメッセージ）"
       },
       {
        "name": "from",
-       "description": "The message id to start from, this is the first message it will delete starting from the most recent message"
+       "description": "The message id to start from, this is the first message it will delete starting from the most recent message",
+       "ja": "削除を開始するメッセージID（最新から数えて最初に削除するメッセージ）"
       }
      ],
      "description": "Deletes all command related messages",
      "arguments": [],
      "command": "clean",
      "x": false,
-     "ja": "botã®é¢é£ãã¤ã¼ãï¼ã³ãã³ãå¿ç­ã®ãªãã©ã¤ï¼ãå¨é¨åé¤ãã¦æ´çãã¾ãã"
+     "ja": "botの関連ツイート（コマンド応答のリプライ）を全部削除して整理します。"
     },
     {
      "short_description": "Do you wish to support this project? Consider donating",
@@ -43,7 +45,7 @@
      "arguments": [],
      "command": "premium",
      "x": false,
-     "ja": "ãã¬ãã¢ã ãã©ã³ã®æå ±ãè¡¨ç¤ºãã¾ãã"
+     "ja": "プレミアムプランの情報を表示します。"
     },
     {
      "short_description": "View all the leaderboards",
@@ -57,13 +59,14 @@
      "options": [
       {
        "name": "server",
-       "description": "Filter the leaderboard by people in this server"
+       "description": "Filter the leaderboard by people in this server",
+       "ja": "このサーバーのメンバーでリーダーボードを絞り込む"
       }
      ],
      "arguments": [],
      "command": "leaderboard",
      "x": false,
-     "ja": "ãªã¼ãã¼ãã¼ããè¡¨ç¤ºãã¾ãã"
+     "ja": "リーダーボードを表示します。"
     },
     {
      "short_description": "Shows the leaderboard for bot upvotes",
@@ -79,18 +82,20 @@
      "options": [
       {
        "name": "all-time",
-       "description": "See the top upvotes all-time"
+       "description": "See the top upvotes all-time",
+       "ja": "全期間のトップ投票数を表示"
       },
       {
        "name": "server",
-       "description": "Filter the leaderboard by people in this server"
+       "description": "Filter the leaderboard by people in this server",
+       "ja": "このサーバーのメンバーでリーダーボードを絞り込む"
       }
      ],
      "description": "Shows the leaderboard for bot upvotes, by default it shows the upvotes from the start of the current month",
      "arguments": [],
      "command": "leaderboard votes",
      "x": false,
-     "ja": "botã®æç¥¨ï¼upvoteï¼ãªã¼ãã¼ãã¼ããè¡¨ç¤ºãã¾ãã"
+     "ja": "botの投票（upvote）リーダーボードを表示します。"
     },
     {
      "aliases": [
@@ -103,7 +108,7 @@
      "arguments": [],
      "command": "vote",
      "x": false,
-     "ja": "botãªã¹ãã§æç¥¨ãã¦botãå¿æ´ã§ãã¾ãï¼"
+     "ja": "botリストで投票してbotを応援できます！"
     }
    ],
    "subCategories": [
@@ -299,7 +304,7 @@
      "arguments": [],
      "command": "autoplay toggle",
      "x": false,
-     "ja": "ãªã¼ããã¬ã¤ã®åãæ¿ããæå¹ã«ããã¨ã­ã¥ã¼ãç©ºã«ãªã£ãã¨ãé¢é£æ²ãèªåã§è¿½å ãã¾ãã"
+     "ja": "オートプレイの切り替え。有効にするとキューが空になったとき関連曲を自動で追加します。"
     },
     {
      "aliases": [
@@ -331,55 +336,68 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist"
+       "description": "Select which page you want to load for a Spotify playlist",
+       "ja": "Spotifyプレイリストの読み込むページを選択"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing"
+       "description": "Insert the tracks right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "search",
-       "description": "Display all the search results instead of getting the first"
+       "description": "Display all the search results instead of getting the first",
+       "ja": "最初の1件だけでなく全検索結果を表示"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       },
       {
        "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)"
+       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
+       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
       }
      ],
      "description": "Queue a track or playlist from a search term or url",
@@ -420,54 +438,65 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "all",
-       "description": "Queue all recently played tracks"
+       "description": "Queue all recently played tracks",
+       "ja": "最近再生した全曲をキューに追加"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing"
+       "description": "Insert the tracks right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       }
      ],
      "description": "Queue your recently played tracks",
      "arguments": [],
      "command": "playrecent",
      "x": false,
-     "ja": "æè¿åçããæ²ãã­ã¥ã¼ã«è¿½å ãã¾ãã"
+     "ja": "最近再生した曲をキューに追加します。"
     },
     {
      "aliases": [],
@@ -518,15 +547,18 @@
      "options": [
       {
        "name": "location",
-       "description": "Search for a location and then show all stations in that area"
+       "description": "Search for a location and then show all stations in that area",
+       "ja": "場所を検索してその地域の全ラジオ局を表示"
       },
       {
        "name": "country",
-       "description": "Search for a country and show all stations in that country"
+       "description": "Search for a country and show all stations in that country",
+       "ja": "国を検索してその国の全ラジオ局を表示"
       },
       {
        "name": "random",
-       "description": "Select a random station of the results"
+       "description": "Select a random station of the results",
+       "ja": "結果からランダムなラジオ局を選択"
       }
      ],
      "description": "Search and play from a radio station",
@@ -537,7 +569,7 @@
      ],
      "command": "radio",
      "x": false,
-     "ja": "ã©ã¸ãªå±ãæ¤ç´¢ãã¦åçãã¾ãã"
+     "ja": "ラジオ局を検索して再生します。"
     },
     {
      "short_description": "Resume a previous session",
@@ -549,14 +581,15 @@
      "options": [
       {
        "name": "view",
-       "description": "Using this will display the entire queue of the session, this will not resume the session"
+       "description": "Using this will display the entire queue of the session, this will not resume the session",
+       "ja": "セッションの全キューを表示（再生は開始しない）"
       }
      ],
      "description": "Resume your most recent session which you were the owner of, resuming a session will make it go back to the exact state it was in before the bot left.",
      "arguments": [],
      "command": "resume session",
      "x": false,
-     "ja": "èªåããªã¼ãã¼ã ã£ãç´è¿ã®ã»ãã·ã§ã³ãåéãã¾ãã"
+     "ja": "自分がオーナーだった直近のセッションを再開します。"
     },
     {
      "short_description": "Makes me join your voice channel",
@@ -631,35 +664,43 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the album before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the album before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にアルバムを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the album before adding it"
+       "description": "Shuffle the album before adding it",
+       "ja": "追加前にアルバムをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the album before adding it"
+       "description": "Reverse the album before adding it",
+       "ja": "追加前にアルバムを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing"
+       "description": "Insert the tracks right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "single",
-       "description": "Play the selected track in an album and only that track"
+       "description": "Play the selected track in an album and only that track",
+       "ja": "アルバム内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       }
      ],
      "description": "Search and queue an album",
@@ -670,7 +711,7 @@
      ],
      "command": "album search",
      "x": false,
-     "ja": "ã¢ã«ãã ãæ¤ç´¢ãã¦ã­ã¥ã¼ã«è¿½å ãã¾ãã"
+     "ja": "アルバムを検索してキューに追加します。"
     },
     {
      "aliases": [
@@ -694,35 +735,43 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing"
+       "description": "Insert the tracks right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       }
      ],
      "description": "Search and queue a playlist",
@@ -733,7 +782,7 @@
      ],
      "command": "playlist search",
      "x": false,
-     "ja": "ãã¬ã¤ãªã¹ããæ¤ç´¢ãã¦ã­ã¥ã¼ã«è¿½å ãã¾ãã"
+     "ja": "プレイリストを検索してキューに追加します。"
     },
     {
      "aliases": [],
@@ -758,31 +807,38 @@
      "options": [
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "insert",
-       "description": "Insert the tracks right after the current song playing"
+       "description": "Insert the tracks right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "all",
-       "description": "Queue all of the tracks from the search result"
+       "description": "Queue all of the tracks from the search result",
+       "ja": "検索結果の全曲をキューに追加"
       },
       {
        "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)"
+       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
+       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
       }
      ],
      "description": "Search for a track to play",
@@ -824,51 +880,63 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist"
+       "description": "Select which page you want to load for a Spotify playlist",
+       "ja": "Spotifyプレイリストの読み込むページを選択"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "now",
-       "description": "Play the tracks right away"
+       "description": "Play the tracks right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "search",
-       "description": "Display all the search results instead of getting the first"
+       "description": "Display all the search results instead of getting the first",
+       "ja": "最初の1件だけでなく全検索結果を表示"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       },
       {
        "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)"
+       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
+       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
       }
      ],
      "description": "Insert a track right after the one that is currently playing",
@@ -903,31 +971,38 @@
      "options": [
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist"
+       "description": "Select which page you want to load for a Spotify playlist",
+       "ja": "Spotifyプレイリストの読み込むページを選択"
       },
       {
        "name": "search",
-       "description": "Display all the search results instead of getting the first"
+       "description": "Display all the search results instead of getting the first",
+       "ja": "最初の1件だけでなく全検索結果を表示"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to `single` but lets you select which track to play"
+       "description": "Similar to `single` but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       },
       {
        "name": "search-type",
-       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)"
+       "description": "Search tracks with one of `soundcloud`, `spotify`, `deezer`, `apple-music` or `tidal`. These can be used directly (e.g `--soundcloud`)",
+       "ja": "soundcloud/spotify/deezer/apple-music等から検索元を指定"
       }
      ],
      "description": "Queue a track, after it has finished playing the bot will leave",
@@ -938,7 +1013,7 @@
      ],
      "command": "playleave",
      "x": false,
-     "ja": "ãã©ãã¯ãã­ã¥ã¼ã«è¿½å ããåçãçµãã£ããbotãéåºãã¾ãã"
+     "ja": "トラックをキューに追加し、再生が終わったらbotが退出します。"
     },
     {
      "short_description": "Select and queue a single track from a playlist by url",
@@ -958,39 +1033,48 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist"
+       "description": "Select which page you want to load for a Spotify playlist",
+       "ja": "Spotifyプレイリストの読み込むページを選択"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the track right after the current song playing"
+       "description": "Insert the track right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the track right away"
+       "description": "Play the track right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       }
      ],
      "description": "Select and queue a single track from a playlist by url, if the url is not a playlist this will be no different to play",
@@ -1001,7 +1085,7 @@
      ],
      "command": "playselect",
      "x": false,
-     "ja": "URLãããã¬ã¤ãªã¹ãåã®1æ²ãé¸ãã§ã­ã¥ã¼ã«è¿½å ãã¾ãã"
+     "ja": "URLからプレイリスト内の1曲を選んでキューに追加します。"
     },
     {
      "short_description": "Queue a single track from a playlist by url",
@@ -1022,39 +1106,48 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "start",
-       "description": "Make the track start at the specified time"
+       "description": "Make the track start at the specified time",
+       "ja": "指定した時間から再生を開始"
       },
       {
        "name": "end",
-       "description": "Make the track end at the specified time"
+       "description": "Make the track end at the specified time",
+       "ja": "指定した時間で再生を終了"
       },
       {
        "name": "page",
-       "description": "Select which page you want to load for a Spotify playlist"
+       "description": "Select which page you want to load for a Spotify playlist",
+       "ja": "Spotifyプレイリストの読み込むページを選択"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the playlist before adding it"
+       "description": "Shuffle the playlist before adding it",
+       "ja": "追加前にプレイリストをシャッフル"
       },
       {
        "name": "reverse",
-       "description": "Reverse the playlist before adding it"
+       "description": "Reverse the playlist before adding it",
+       "ja": "追加前にプレイリストを逆順にする"
       },
       {
        "name": "insert",
-       "description": "Insert the track right after the current song playing"
+       "description": "Insert the track right after the current song playing",
+       "ja": "現在の曲の直後に挿入"
       },
       {
        "name": "now",
-       "description": "Play the track right away"
+       "description": "Play the track right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the track after it has been played"
+       "description": "Remove the track after it has been played",
+       "ja": "再生後に曲をキューから削除"
       }
      ],
      "description": "Queue a single track from a playlist by url, if the url is not a playlist this will be no different to play",
@@ -1065,7 +1158,7 @@
      ],
      "command": "playsingle",
      "x": false,
-     "ja": "URLãããã¬ã¤ãªã¹ãåã®1æ²ãã­ã¥ã¼ã«è¿½å ãã¾ãã"
+     "ja": "URLからプレイリスト内の1曲をキューに追加します。"
     }
    ],
    "subCategories": []
@@ -1151,7 +1244,7 @@
      ],
      "command": "end time",
      "x": false,
-     "ja": "ç¾å¨ã®ãã©ãã¯ã®çµäºä½ç½®ãè¨­å®ãã¾ãã"
+     "ja": "現在のトラックの終了位置を設定します。"
     },
     {
      "short_description": "Wind the track forwards",
@@ -1180,7 +1273,8 @@
      "options": [
       {
        "name": "force",
-       "description": "Force it to pause instead of toggling between pause and resume"
+       "description": "Force it to pause instead of toggling between pause and resume",
+       "ja": "一時停止/再開の切替でなく強制的に一時停止"
       }
      ],
      "arguments": [],
@@ -1240,7 +1334,7 @@
      ],
      "command": "start time",
      "x": false,
-     "ja": "ç¾å¨ã®ãã©ãã¯ã®éå§ä½ç½®ãè¨­å®ãã¾ãã"
+     "ja": "現在のトラックの開始位置を設定します。"
     },
     {
      "short_description": "Change the volume",
@@ -1379,15 +1473,18 @@
      "options": [
       {
        "name": "restart",
-       "description": "Restart the queue and skip the currently playing song"
+       "description": "Restart the queue and skip the currently playing song",
+       "ja": "キューを最初から再生して現在の曲をスキップ"
       },
       {
        "name": "keep-position",
-       "description": "Keep the shuffled position of the currently playing song"
+       "description": "Keep the shuffled position of the currently playing song",
+       "ja": "現在の曲のシャッフル位置を維持"
       },
       {
        "name": "upcoming",
-       "description": "Shuffle the upcoming tracks"
+       "description": "Shuffle the upcoming tracks",
+       "ja": "今後の曲をシャッフル"
       }
      ],
      "arguments": [
@@ -1421,7 +1518,8 @@
      "options": [
       {
        "name": "reverse",
-       "description": "Reverse the sort type, this would change `length` from shortest to longest track"
+       "description": "Reverse the sort type, this would change `length` from shortest to longest track",
+       "ja": "並べ替えの向きを反転（lengthは短い順→長い順に変わる）"
       }
      ],
      "description": "Sort the queue, the queue will start over by the default, if you want it to continue from the current song you can specify it in the argument",
@@ -1482,7 +1580,7 @@
      ],
      "command": "mass move",
      "x": false,
-     "ja": "ã­ã¥ã¼åã®è¤æ°ãã©ãã¯ãã¾ã¨ãã¦ç§»åãã¾ãï¼first/lastæå®å¯ï¼ã"
+     "ja": "キュー内の複数トラックをまとめて移動します（first/last指定可）。"
     },
     {
      "short_description": "Move a track in the queue",
@@ -1590,11 +1688,13 @@
      "options": [
       {
        "name": "restart",
-       "description": "Restart the queue and skip the currently playing song"
+       "description": "Restart the queue and skip the currently playing song",
+       "ja": "キューを最初から再生して現在の曲をスキップ"
       },
       {
        "name": "upcoming",
-       "description": "Reorder the upcoming tracks"
+       "description": "Reorder the upcoming tracks",
+       "ja": "今後の曲を並べ替える"
       }
      ],
      "description": "Order the queue by specified option.\n\n**Available order options**\n`added first` - Order by the time the track was added\n`added last` - Order by the time the track was added, last first\n`fair` - Order the queue fairly where the user's next track is after the other user's track",
@@ -1605,7 +1705,7 @@
      ],
      "command": "reorder",
      "x": false,
-     "ja": "æå®ãªãã·ã§ã³ã§ã­ã¥ã¼ãä¸¦ã¹æ¿ãã¾ãã"
+     "ja": "指定オプションでキューを並べ替えます。"
     }
    ],
    "subCategories": [
@@ -2213,23 +2313,28 @@
      "options": [
       {
        "name": "author",
-       "description": "Filter the tracks by an author"
+       "description": "Filter the tracks by an author",
+       "ja": "作者で曲を絞り込む"
       },
       {
        "name": "title",
-       "description": "Filter the tracks by a title"
+       "description": "Filter the tracks by a title",
+       "ja": "タイトルで曲を絞り込む"
       },
       {
        "name": "sort",
-       "description": "Sort the tracks, possible values `title`, `author`, `length`"
+       "description": "Sort the tracks, possible values `title`, `author`, `length`",
+       "ja": "曲を並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "reverse",
-       "description": "Reverse the tracks"
+       "description": "Reverse the tracks",
+       "ja": "曲を逆順にする"
       },
       {
        "name": "with-requester",
-       "description": "Include who requested the track"
+       "description": "Include who requested the track",
+       "ja": "リクエストした人を表示"
       }
      ],
      "description": "Get a list of the full queue, not to be confused with the `upcoming` command which will only show all the tracks after the current one.\n\nGive a track argument to skip to the page it is on, you can use `first`, `last` and `current` as arguments. You can also add `+` or `-` with a following number after the arguments to get a relative track!",
@@ -2255,7 +2360,7 @@
      "arguments": [],
      "command": "queue information",
      "x": false,
-     "ja": "ã­ã¥ã¼ã«é¢ããæå ±ãè¡¨ç¤ºãã¾ãã"
+     "ja": "キューに関する情報を表示します。"
     },
     {
      "aliases": [
@@ -2292,7 +2397,8 @@
      "options": [
       {
        "name": "upcoming",
-       "description": "Only show the upcoming tracks"
+       "description": "Only show the upcoming tracks",
+       "ja": "今後の曲だけを表示"
       }
      ],
      "arguments": [
@@ -2302,7 +2408,7 @@
      ],
      "command": "requested",
      "x": false,
-     "ja": "åæ²ãèª°ããªã¯ã¨ã¹ãããããè¡¨ç¤ºãã¾ãã"
+     "ja": "各曲を誰がリクエストしたかを表示します。"
     },
     {
      "short_description": "Save a song to our private messages",
@@ -2329,7 +2435,7 @@
      ],
      "command": "save",
      "x": false,
-     "ja": "ç¾å¨ã®æ²ã®æå ±ãDMã§éä¿¡ãã¾ãã"
+     "ja": "現在の曲の情報をDMで送信します。"
     },
     {
      "aliases": [
@@ -2342,14 +2448,15 @@
      "options": [
       {
        "name": "extended",
-       "description": "Get additional information such as ids"
+       "description": "Get additional information such as ids",
+       "ja": "ID等の追加情報を表示"
       }
      ],
      "description": "Get information about the current session",
      "arguments": [],
      "command": "session information",
      "x": false,
-     "ja": "ç¾å¨ã®ã»ãã·ã§ã³ã®æå ±ãè¡¨ç¤ºãã¾ãã"
+     "ja": "現在のセッションの情報を表示します。"
     },
     {
      "aliases": [
@@ -2373,34 +2480,40 @@
      "options": [
       {
        "name": "author",
-       "description": "Filter the tracks by an author"
+       "description": "Filter the tracks by an author",
+       "ja": "作者で曲を絞り込む"
       },
       {
        "name": "title",
-       "description": "Filter the tracks by a title"
+       "description": "Filter the tracks by a title",
+       "ja": "タイトルで曲を絞り込む"
       },
       {
        "name": "sort",
-       "description": "Sort the tracks, possible values `title`, `author`, `length`"
+       "description": "Sort the tracks, possible values `title`, `author`, `length`",
+       "ja": "曲を並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "reverse",
-       "description": "Reverse the tracks"
+       "description": "Reverse the tracks",
+       "ja": "曲を逆順にする"
       },
       {
        "name": "with-requester",
-       "description": "Include who requested the track"
+       "description": "Include who requested the track",
+       "ja": "リクエストした人を表示"
       },
       {
        "name": "with-queue-index",
-       "description": "Display the track queue index instead of upcoming index"
+       "description": "Display the track queue index instead of upcoming index",
+       "ja": "キュー番号を表示（今後の番号でなく）"
       }
      ],
      "description": "Get a list of all the upcoming tracks, not to be confused with the `queue` command which will show all the tracks including the ones already played",
      "arguments": [],
      "command": "upcoming",
      "x": false,
-     "ja": "ä»å¾ã®ãã©ãã¯ã®ãªã¹ããè¡¨ç¤ºãã¾ãã"
+     "ja": "今後のトラックのリストを表示します。"
     }
    ],
    "subCategories": [
@@ -2566,7 +2679,7 @@
      ],
      "command": "profile set server visibility",
      "x": false,
-     "ja": "ãã®ãµã¼ãã¼ã§ãã­ãã£ã¼ã«ãã¼ã¿ãè¦ãããäººãè¨­å®ãã¾ãã"
+     "ja": "このサーバーでプロフィールデータを見られる人を設定します。"
     },
     {
      "short_description": "View your profile",
@@ -2592,7 +2705,7 @@
      ],
      "command": "profile",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ãè¡¨ç¤ºãã¾ãã"
+     "ja": "プロフィールを表示します。"
     },
     {
      "short_description": "Set your profile avatar background",
@@ -2630,7 +2743,7 @@
      ],
      "command": "profile set avatar background",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼èæ¯ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールのアバター背景を設定します。"
     },
     {
      "short_description": "Set your profile avatar border",
@@ -2668,7 +2781,7 @@
      ],
      "command": "profile set avatar border",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼æ ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールのアバター枠を設定します。"
     },
     {
      "short_description": "Set your profile avatar shape, `circle` or `square`",
@@ -2706,7 +2819,7 @@
      ],
      "command": "profile set avatar shape",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®ã¢ãã¿ã¼å½¢ç¶ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールのアバター形状を設定します。"
     },
     {
      "short_description": "Set your profile background",
@@ -2751,7 +2864,7 @@
      ],
      "command": "profile set background",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®èæ¯ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールの背景を設定します。"
     },
     {
      "short_description": "Set your profile color",
@@ -2794,7 +2907,7 @@
      ],
      "command": "profile set color",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®è²ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールの色を設定します。"
     },
     {
      "short_description": "Set what parts (servers, friends and tracks) are visible on your profile",
@@ -2839,7 +2952,7 @@
      ],
      "command": "profile set privacy",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ã®å¬éç¯å²ãè¨­å®ãã¾ãã"
+     "ja": "プロフィールの公開範囲を設定します。"
     },
     {
      "short_description": "Set who can view your profile, `public` or `private`",
@@ -2878,7 +2991,7 @@
      ],
      "command": "profile set visibility",
      "x": false,
-     "ja": "ãã­ãã£ã¼ã«ãè¦ãããäººãè¨­å®ãã¾ãï¼public/privateç­ï¼ã"
+     "ja": "プロフィールを見られる人を設定します（public/private等）。"
     }
    ],
    "subCategories": []
@@ -2911,7 +3024,7 @@
      ],
      "command": "collection clone",
      "x": false,
-     "ja": "ã³ã¬ã¯ã·ã§ã³ãè¤è£½ãã¾ãã"
+     "ja": "コレクションを複製します。"
     },
     {
      "short_description": "Delete a saved collection",
@@ -2937,7 +3050,7 @@
      ],
      "command": "collection delete",
      "x": false,
-     "ja": "ã³ã¬ã¯ã·ã§ã³ãåé¤ãã¾ãã"
+     "ja": "コレクションを削除します。"
     },
     {
      "short_description": "Import your Groovy playlist from a CSV file",
@@ -2953,7 +3066,7 @@
      ],
      "command": "collection import",
      "x": false,
-     "ja": "ã³ã¬ã¯ã·ã§ã³ãã¤ã³ãã¼ããã¾ãï¼ãã¬ãã¢ã éå®ï¼ã"
+     "ja": "コレクションをインポートします（プレミアム限定）。"
     },
     {
      "short_description": "Merge two of your collections together",
@@ -2980,7 +3093,7 @@
      ],
      "command": "collection merge",
      "x": false,
-     "ja": "2ã¤ã®ã³ã¬ã¯ã·ã§ã³ãçµ±åãã¾ãã"
+     "ja": "2つのコレクションを統合します。"
     },
     {
      "short_description": "Shows all your saved collections and their content",
@@ -2994,11 +3107,13 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the view list, possible values `title`, `author`, `length`"
+       "description": "Sort the view list, possible values `title`, `author`, `length`",
+       "ja": "一覧を並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "reverse",
-       "description": "Reverse the view list"
+       "description": "Reverse the view list",
+       "ja": "一覧を逆順にする"
       }
      ],
      "arguments": [
@@ -3008,7 +3123,7 @@
      ],
      "command": "collections",
      "x": false,
-     "ja": "ã³ã¬ã¯ã·ã§ã³ã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
+     "ja": "コレクションの一覧を表示します。"
     },
     {
      "short_description": "Create an empty collection",
@@ -3034,7 +3149,7 @@
      ],
      "command": "collection create",
      "x": false,
-     "ja": "æ°ããã³ã¬ã¯ã·ã§ã³ãä½æãã¾ãã"
+     "ja": "新しいコレクションを作成します。"
     },
     {
      "short_description": "Save the current queue",
@@ -3060,7 +3175,7 @@
      ],
      "command": "collection save",
      "x": false,
-     "ja": "ç¾å¨ã®ã­ã¥ã¼ãã³ã¬ã¯ã·ã§ã³ã¨ãã¦ä¿å­ãã¾ãã"
+     "ja": "現在のキューをコレクションとして保存します。"
     },
     {
      "aliases": [
@@ -3094,35 +3209,43 @@
      "options": [
       {
        "name": "sort",
-       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`"
+       "description": "Sort the playlist before adding it, possible values `title`, `author`, `length`",
+       "ja": "追加前にプレイリストを並べ替える（title/author/lengthで指定）"
       },
       {
        "name": "shuffle",
-       "description": "Shuffle the collection before adding it"
+       "description": "Shuffle the collection before adding it",
+       "ja": "追加前にコレクションをシャッフル"
       },
       {
        "name": "insert",
-       "description": "Insert the collection right after the current song playing"
+       "description": "Insert the collection right after the current song playing",
+       "ja": "現在の曲の直後にコレクションを挿入"
       },
       {
        "name": "now",
-       "description": "Play the collection right away"
+       "description": "Play the collection right away",
+       "ja": "すぐに再生"
       },
       {
        "name": "remove",
-       "description": "Remove the tracks in the collection after they have been played"
+       "description": "Remove the tracks in the collection after they have been played",
+       "ja": "再生後にコレクションの曲を削除"
       },
       {
        "name": "reverse",
-       "description": "Reverse the collection before adding it"
+       "description": "Reverse the collection before adding it",
+       "ja": "追加前にコレクションを逆順にする"
       },
       {
        "name": "single",
-       "description": "Play the selected track in a playlist and only that track"
+       "description": "Play the selected track in a playlist and only that track",
+       "ja": "プレイリスト内の選択した曲だけを再生"
       },
       {
        "name": "select",
-       "description": "Similar to --single but lets you select which track to play"
+       "description": "Similar to --single but lets you select which track to play",
+       "ja": "singleに似ているが再生する曲を選べる"
       }
      ],
      "description": "Queue and play an exisiting collection",
@@ -3133,7 +3256,7 @@
      ],
      "command": "collection load",
      "x": false,
-     "ja": "æ¢å­ã®ã³ã¬ã¯ã·ã§ã³ãã­ã¥ã¼ã«èª­ã¿è¾¼ãã§åçãã¾ãã"
+     "ja": "既存のコレクションをキューに読み込んで再生します。"
     }
    ],
    "subCategories": [
@@ -3465,21 +3588,24 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server properties"
+       "description": "force the command to use the server properties",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own properties"
+       "description": "force the command to use your own properties",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session properties"
+       "description": "force the command to use the session properties",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "arguments": [],
      "command": "settings",
      "x": false,
-     "ja": "ç¾å¨ã®è¨­å®ãè¡¨ç¤ºãã¾ãã"
+     "ja": "現在の設定を表示します。"
     },
     {
      "short_description": "Reset all the settings",
@@ -3497,21 +3623,24 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server properties"
+       "description": "force the command to use the server properties",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own properties"
+       "description": "force the command to use your own properties",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session properties"
+       "description": "force the command to use the session properties",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "arguments": [],
      "command": "settings reset",
      "x": false,
-     "ja": "è¨­å®ããªã»ãããã¾ãã"
+     "ja": "設定をリセットします。"
     }
    ],
    "subCategories": [
@@ -5025,15 +5154,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "description": "Allow a specific permission for the current session\n\n**Available permissions**\n`add track` - Allows you to add tracks to the queue\n`add playlist` - Allows you to add playlists to the queue\n`remove track` - Allows you to remove tracks from the queue\n`shuffle queue` - Allows you to shuffle the queue\n`change volume` - Allows you to change the volume\n`update state` - Allows you to update the current track's state\n`index queue` - Allows you to update the queue\n`leave` - Allows you to make the bot disconnect\n`autoplay` - Allows you to start and stop autoplay\n`audio filter` - Allows you to apply any audio filters",
@@ -5047,7 +5179,7 @@
      ],
      "command": "permission allow",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã®ç¹å®ã®æ¨©éãè¨±å¯ãã¾ãã"
+     "ja": "セッションの特定の権限を許可します。"
     },
     {
      "short_description": "Deny a specific permission for the current session",
@@ -5081,15 +5213,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "description": "Deny a specific permission for the current session\n\n**Available permissions**\n`add track` - Allows you to add tracks to the queue\n`add playlist` - Allows you to add playlists to the queue\n`remove track` - Allows you to remove tracks from the queue\n`shuffle queue` - Allows you to shuffle the queue\n`change volume` - Allows you to change the volume\n`update state` - Allows you to update the current track's state\n`index queue` - Allows you to update the queue\n`leave` - Allows you to make the bot disconnect\n`autoplay` - Allows you to start and stop autoplay\n`audio filter` - Allows you to apply any audio filters",
@@ -5103,7 +5238,7 @@
      ],
      "command": "permission deny",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã®ç¹å®ã®æ¨©éãæå¦ãã¾ãã"
+     "ja": "セッションの特定の権限を拒否します。"
     },
     {
      "short_description": "Get the permissions of the current session or a user",
@@ -5138,15 +5273,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "description": "Get the permissions of the current session or user, if you are in a session, no option was provided and the guild is using **combine** as the permission mode this will return the effective permissions of the current session meaning both the user and server's permissions combined together",
@@ -5157,7 +5295,7 @@
      ],
      "command": "permissions",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã¾ãã¯ã¦ã¼ã¶ã¼ã®æ¨©éãè¡¨ç¤ºãã¾ãã"
+     "ja": "セッションまたはユーザーの権限を表示します。"
     },
     {
      "short_description": "Allow all permissions",
@@ -5189,15 +5327,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "arguments": [
@@ -5207,7 +5348,7 @@
      ],
      "command": "permissions allow all",
      "x": false,
-     "ja": "ãã¹ã¦ã®æ¨©éãè¨±å¯ãã¾ãã"
+     "ja": "すべての権限を許可します。"
     },
     {
      "short_description": "Deny all permission for the current session",
@@ -5239,15 +5380,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "arguments": [
@@ -5257,7 +5401,7 @@
      ],
      "command": "permissions deny all",
      "x": false,
-     "ja": "ãã¹ã¦ã®æ¨©éãæå¦ãã¾ãã"
+     "ja": "すべての権限を拒否します。"
     },
     {
      "short_description": "Reset the permissions of a session or user",
@@ -5286,15 +5430,18 @@
      "options": [
       {
        "name": "server",
-       "description": "force the command to use the server permissions"
+       "description": "force the command to use the server permissions",
+       "ja": "サーバー設定を対象にする"
       },
       {
        "name": "self",
-       "description": "force the command to use your own permissions"
+       "description": "force the command to use your own permissions",
+       "ja": "自分の設定を対象にする"
       },
       {
        "name": "session",
-       "description": "force the command to use the session permissions"
+       "description": "force the command to use the session permissions",
+       "ja": "セッション設定を対象にする"
       }
      ],
      "arguments": [
@@ -5304,7 +5451,7 @@
      ],
      "command": "permissions reset",
      "x": false,
-     "ja": "æ¨©éè¨­å®ããªã»ãããã¾ãã"
+     "ja": "権限設定をリセットします。"
     }
    ],
    "subCategories": []
@@ -5325,7 +5472,7 @@
      "arguments": [],
      "command": "claim ownership",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã®ãªã¼ãã¼æ¨©ãä¸»å¼µãã¾ãã"
+     "ja": "セッションのオーナー権を主張します。"
     },
     {
      "short_description": "Update announcement channel",
@@ -5348,7 +5495,7 @@
      ],
      "command": "rebind",
      "x": false,
-     "ja": "ã¢ãã¦ã³ã¹ãããã£ã³ãã«ãæ´æ°ãã¾ãã"
+     "ja": "アナウンスするチャンネルを更新します。"
     },
     {
      "short_description": "Transfer the session ownership to another member",
@@ -5373,7 +5520,7 @@
      ],
      "command": "transfer ownership",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã®ãªã¼ãã¼æ¨©ãå¥ã®ã¦ã¼ã¶ã¼ã«è­²æ¸¡ãã¾ãã"
+     "ja": "セッションのオーナー権を別のユーザーに譲渡します。"
     }
    ],
    "subCategories": []
@@ -5394,17 +5541,19 @@
      "options": [
       {
        "name": "user",
-       "description": "View all personal prefixes"
+       "description": "View all personal prefixes",
+       "ja": "自分のプレフィックス一覧を表示"
       },
       {
        "name": "server",
-       "description": "View all server prefixes"
+       "description": "View all server prefixes",
+       "ja": "サーバーのプレフィックス一覧を表示"
       }
      ],
      "arguments": [],
      "command": "prefix list",
      "x": false,
-     "ja": "ä½¿ç¨å¯è½ãªãã¬ãã£ãã¯ã¹ã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
+     "ja": "使用可能なプレフィックスの一覧を表示します。"
     }
    ],
    "subCategories": [
@@ -5686,7 +5835,7 @@
      ],
      "command": "announce channel reset",
      "x": false,
-     "ja": "è¨­å®ããã¦ããã¢ãã¦ã³ã¹ãã£ã³ãã«ãè§£é¤ãã¾ãã"
+     "ja": "設定されているアナウンスチャンネルを解除します。"
     },
     {
      "short_description": "Set the announce channel for all sessions",
@@ -5731,7 +5880,7 @@
      ],
      "command": "announce channel set",
      "x": false,
-     "ja": "ã¢ãã¦ã³ã¹ãã£ã³ãã«ãè¨­å®ãã¾ãã"
+     "ja": "アナウンスチャンネルを設定します。"
     },
     {
      "short_description": "Auto deletes the message which triggered a command",
@@ -5753,7 +5902,7 @@
      "arguments": [],
      "command": "auto delete toggle",
      "x": false,
-     "ja": "ã³ãã³ããããªã¬ã¼ããã¡ãã»ã¼ã¸ãèªååé¤ãããåãæ¿ãã¾ãã"
+     "ja": "コマンドをトリガーしたメッセージを自動削除するか切り替えます。"
     },
     {
      "short_description": "24/7 mode, the bot will not leave the channel by itself",
@@ -5798,11 +5947,13 @@
      "options": [
       {
        "name": "view",
-       "description": "Show the currently set value for each of the bots"
+       "description": "Show the currently set value for each of the bots",
+       "ja": "各botの現在の設定値を表示"
       },
       {
        "name": "reset",
-       "description": "Resets the value, if used in combination with a bot argument it will only reset it for that bot"
+       "description": "Resets the value, if used in combination with a bot argument it will only reset it for that bot",
+       "ja": "設定値をリセット（bot指定と併用するとそのbotのみ）"
       }
      ],
      "description": "Toggle 24/7 mode, the bot will not leave the channel by itself. This can be set on a per bot basis (see the examples)",
@@ -5834,7 +5985,7 @@
      "arguments": [],
      "command": "lock",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ãã­ãã¯ãã¦æ¨©éå¤æ´ãç¡å¹åãã¾ãã"
+     "ja": "セッションをロックして権限変更を無効化します。"
     },
     {
      "short_description": "Allows a single user to own multiple sessions",
@@ -5879,7 +6030,7 @@
      ],
      "command": "multi bot ownership",
      "x": false,
-     "ja": "è¤æ°botã®ãªã¼ãã¼è¨­å®ãç®¡çãã¾ãã"
+     "ja": "複数botのオーナー設定を管理します。"
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -5924,7 +6075,7 @@
      ],
      "command": "preferred bots server",
      "x": false,
-     "ja": "ãµã¼ãã¼ã§botãåå ããåªåé ãè¨­å®ãã¾ãã"
+     "ja": "サーバーでbotが参加する優先順を設定します。"
     },
     {
      "short_description": "Set who can view dashboard statistics for this server, `everyone` or `none`",
@@ -5971,7 +6122,7 @@
      ],
      "command": "dashboard statistics access",
      "x": false,
-     "ja": "ãµã¼ãã¼ã®ããã·ã¥ãã¼ãçµ±è¨ãè¦ãããäººãè¨­å®ãã¾ãã"
+     "ja": "サーバーのダッシュボード統計を見られる人を設定します。"
     },
     {
      "short_description": "Auto deletes paged messages when they are replaced",
@@ -5991,7 +6142,7 @@
      "arguments": [],
      "command": "page replace delete toggle",
      "x": false,
-     "ja": "ãã¼ã¸çµæãç½®æãããåé¤ããããåãæ¿ãã¾ãã"
+     "ja": "ページ結果を置換するか削除するかを切り替えます。"
     },
     {
      "short_description": "Auto deletes paged messages when they timeout",
@@ -6011,7 +6162,7 @@
      "arguments": [],
      "command": "page delete toggle",
      "x": false,
-     "ja": "ãã¼ã¸çµæãåé¤ãããã©ãããåãæ¿ãã¾ãã"
+     "ja": "ページ結果を削除するかどうかを切り替えます。"
     },
     {
      "short_description": "Set the timeout time for sessions",
@@ -6069,7 +6220,7 @@
      ],
      "command": "timeout set",
      "x": false,
-     "ja": "ã»ãã·ã§ã³ã®ã¿ã¤ã ã¢ã¦ãæéãè¨­å®ãã¾ãã"
+     "ja": "セッションのタイムアウト時間を設定します。"
     },
     {
      "short_description": "View all session timeout durations",
@@ -6080,7 +6231,7 @@
      "arguments": [],
      "command": "timeouts",
      "x": false,
-     "ja": "ã¿ã¤ã ã¢ã¦ãã®ä¸è¦§ãè¡¨ç¤ºãã¾ãã"
+     "ja": "タイムアウトの一覧を表示します。"
     }
    ],
    "subCategories": [
@@ -6946,7 +7097,7 @@
      "arguments": [],
      "command": "auto correct toggle",
      "x": false,
-     "ja": "ã³ãã³ãã®èª¤å­ãèªåä¿®æ­£ãããåãæ¿ãã¾ãã"
+     "ja": "コマンドの誤字を自動修正するか切り替えます。"
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -7002,7 +7153,7 @@
      ],
      "command": "preferred bots",
      "x": false,
-     "ja": "botãåå ããåªåé ãè¨­å®ãã¾ãã"
+     "ja": "botが参加する優先順を設定します。"
     },
     {
      "short_description": "Toggle automatic default volume mode",
@@ -7016,7 +7167,7 @@
      "arguments": [],
      "command": "volume automatic toggle",
      "x": false,
-     "ja": "èªåããã©ã«ãé³éã¢ã¼ããåãæ¿ãã¾ãã"
+     "ja": "自動デフォルト音量モードを切り替えます。"
     }
    ],
    "subCategories": []
@@ -7068,11 +7219,13 @@
      "options": [
       {
        "name": "view",
-       "description": "Show the currently set value for each of the bots"
+       "description": "Show the currently set value for each of the bots",
+       "ja": "各botの現在の設定値を表示"
       },
       {
        "name": "reset",
-       "description": "Resets the value, if used in combination with a bot argument it will only reset it for that bot"
+       "description": "Resets the value, if used in combination with a bot argument it will only reset it for that bot",
+       "ja": "設定値をリセット（bot指定と併用するとそのbotのみ）"
       }
      ],
      "description": "Toggle 24/7 mode, the bot will not leave the channel by itself. This can be set on a per bot basis (see the examples)",
@@ -7100,7 +7253,7 @@
      ],
      "command": "collection import",
      "x": false,
-     "ja": "ã³ã¬ã¯ã·ã§ã³ãã¤ã³ãã¼ããã¾ãï¼ãã¬ãã¢ã éå®ï¼ã"
+     "ja": "コレクションをインポートします（プレミアム限定）。"
     }
    ],
    "subCategories": [
@@ -7682,7 +7835,7 @@
    "arguments": [],
    "command": "previous page",
    "x": false,
-   "ja": "ãã¼ã¸è¡¨ç¤ºã®åã®ãã¼ã¸ã«ç§»åãã¾ãã"
+   "ja": "ページ表示の前のページに移動します。"
   },
   {
    "aliases": [
@@ -7703,7 +7856,7 @@
    ],
    "command": "go to page",
    "x": false,
-   "ja": "ãã¼ã¸è¡¨ç¤ºã®ä»»æã®ãã¼ã¸ã«ç§»åãã¾ãã"
+   "ja": "ページ表示の任意のページに移動します。"
   },
   {
    "aliases": [
@@ -7716,7 +7869,7 @@
    "arguments": [],
    "command": "next page",
    "x": false,
-   "ja": "ãã¼ã¸è¡¨ç¤ºã®æ¬¡ã®ãã¼ã¸ã«ç§»åãã¾ãã"
+   "ja": "ページ表示の次のページに移動します。"
   },
   {
    "aliases": [],
@@ -7727,7 +7880,7 @@
    "arguments": [],
    "command": "cancel",
    "x": false,
-   "ja": "ãã¼ã¸è¡¨ç¤ºãã­ã£ã³ã»ã«ãã¾ãã"
+   "ja": "ページ表示をキャンセルします。"
   },
   {
    "aliases": [
@@ -7751,7 +7904,7 @@
    ],
    "command": "select",
    "x": false,
-   "ja": "é¸æè¢ããé ç®ãé¸ã³ã¾ãã"
+   "ja": "選択肢から項目を選びます。"
   },
   {
    "short_description": "Use this to have me re-send any paged message",
@@ -7765,7 +7918,7 @@
    "arguments": [],
    "command": "renew",
    "x": false,
-   "ja": "ãã¼ã¸è¡¨ç¤ºãæ´æ°ãã¾ãã"
+   "ja": "ページ表示を更新します。"
   }
  ]
 }
