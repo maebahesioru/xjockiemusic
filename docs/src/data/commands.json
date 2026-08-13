@@ -353,7 +353,8 @@
      ],
      "command": "play",
      "x": true,
-     "ja": "曲名やURLを検索してキューに追加します。例: !play 星野源 SUN"
+     "ja": "曲名やURLを検索してキューに追加します。例: !play 星野源 SUN",
+     "x_alias": "!p"
     },
     {
      "aliases": [
@@ -548,7 +549,8 @@
      "arguments": [],
      "command": "join",
      "x": true,
-     "ja": "スペースに参加してスピーカーリクエストを送信します。例: !join"
+     "ja": "スペースに参加してスピーカーリクエストを送信します。例: !join",
+     "x_alias": "!j"
     },
     {
      "short_description": "Makes me leave the voice channel",
@@ -587,7 +589,8 @@
      ],
      "command": "leave",
      "x": true,
-     "ja": "スペースから離脱して再生を停止します。例: !leave"
+     "ja": "スペースから離脱して再生を停止します。例: !leave",
+     "x_alias": "!l"
     },
     {
      "aliases": [
@@ -837,7 +840,8 @@
      ],
      "command": "insert",
      "x": true,
-     "ja": "次の曲としてキューに挿入します。例: !insert 曲名"
+     "ja": "次の曲としてキューに挿入します。例: !insert 曲名",
+     "x_alias": "!i"
     },
     {
      "aliases": [
@@ -1093,7 +1097,8 @@
      ],
      "command": "backward",
      "x": true,
-     "ja": "再生位置を30秒戻します。例: !backward"
+     "ja": "再生位置を30秒戻します。例: !backward",
+     "x_alias": "!b"
     },
     {
      "short_description": "Set the end position of the current track",
@@ -1153,7 +1158,8 @@
      ],
      "command": "forward",
      "x": true,
-     "ja": "再生位置を30秒進めます。例: !forward"
+     "ja": "再生位置を30秒進めます。例: !forward",
+     "x_alias": "!f"
     },
     {
      "short_description": "Pause the current session",
@@ -1164,7 +1170,8 @@
      "arguments": [],
      "command": "pause",
      "x": true,
-     "ja": "再生を一時停止します。例: !pause"
+     "ja": "再生を一時停止します。例: !pause",
+     "x_alias": "!pa"
     },
     {
      "short_description": "Resume playing the current track",
@@ -1177,7 +1184,8 @@
      "arguments": [],
      "command": "resume",
      "x": true,
-     "ja": "一時停止した再生を再開します。例: !resume"
+     "ja": "一時停止した再生を再開します。例: !resume",
+     "x_alias": "!r"
     },
     {
      "short_description": "Set the start position of the current track",
@@ -1259,7 +1267,8 @@
      ],
      "command": "volume",
      "x": true,
-     "ja": "音量を変更します（0〜200・標準100）。例: !volume 150"
+     "ja": "音量を変更します（0〜200・標準100）。例: !volume 150",
+     "x_alias": "!v"
     },
     {
      "short_description": "Wind to the desired position in the track",
@@ -1361,7 +1370,8 @@
      ],
      "command": "shuffle",
      "x": true,
-     "ja": "キューをシャッフルします。例: !shuffle"
+     "ja": "キューをシャッフルします。例: !shuffle",
+     "x_alias": "!sf"
     },
     {
      "short_description": "Sort the queue",
@@ -2138,7 +2148,7 @@
      "command": "next up",
      "x": true,
      "ja": "次に再生される曲を表示します。例: !nextup",
-     "x_alias": "!nextup"
+     "x_alias": "!nu"
     },
     {
      "short_description": "Get information about the currently playing track",
@@ -2155,7 +2165,7 @@
      "command": "now playing",
      "x": true,
      "ja": "現在再生中の曲を表示します。例: !np",
-     "x_alias": "!np / !nowplaying"
+     "x_alias": "!n / !np"
     },
     {
      "short_description": "Get a list of the full queue",
@@ -2186,7 +2196,8 @@
      ],
      "command": "queue",
      "x": true,
-     "ja": "現在のキューを表示します。例: !queue"
+     "ja": "現在のキューを表示します。例: !queue",
+     "x_alias": "!q"
     },
     {
      "short_description": "Get information about the queue",
@@ -2217,7 +2228,7 @@
      "command": "recently played",
      "x": true,
      "ja": "最近再生した曲を表示します。例: !recent",
-     "x_alias": "!recent"
+     "x_alias": "!rc"
     },
     {
      "short_description": "Get all the tracks requested by a user",
@@ -2311,7 +2322,7 @@
      "command": "session statistics",
      "x": true,
      "ja": "再生統計を表示します。例: !stats",
-     "x_alias": "!stats"
+     "x_alias": "!st"
     },
     {
      "short_description": "Get a list of all the upcoming tracks",
@@ -7660,6 +7671,64 @@
       }
      ],
      "subCategories": []
+    }
+   ]
+  },
+  {
+   "name": "X-only",
+   "commands": [
+    {
+     "command": "skip",
+     "aliases": [
+      "next",
+      "s"
+     ],
+     "usage": "skip",
+     "description": "Skip the current track",
+     "options": [],
+     "examples": [],
+     "ja": "現在の曲をスキップします。例: !skip / !s",
+     "x": true,
+     "x_alias": "!s / !next"
+    },
+    {
+     "command": "remove",
+     "aliases": [
+      "rm"
+     ],
+     "usage": "remove <number>",
+     "description": "Remove a track from the queue by number",
+     "options": [],
+     "examples": [],
+     "ja": "指定番号の曲をキューから削除します。例: !remove 3 / !rm 3",
+     "x": true,
+     "x_alias": "!rm"
+    },
+    {
+     "command": "clear",
+     "aliases": [
+      "cl"
+     ],
+     "usage": "clear",
+     "description": "Clear the entire queue",
+     "options": [],
+     "examples": [],
+     "ja": "キューを全消去します。例: !clear / !cl",
+     "x": true,
+     "x_alias": "!cl"
+    },
+    {
+     "command": "help",
+     "aliases": [
+      "h"
+     ],
+     "usage": "help",
+     "description": "Show the command list",
+     "options": [],
+     "examples": [],
+     "ja": "コマンド一覧を表示します。例: !help / !h",
+     "x": true,
+     "x_alias": "!h"
     }
    ]
   }

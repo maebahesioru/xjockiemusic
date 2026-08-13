@@ -38,6 +38,11 @@ function CommandRow({
       </button>
       {open && (
         <div className="space-y-2 bg-black/20 px-4 pb-4">
+          {cmd.x_alias && (
+            <p className="text-xs text-jockie">
+              {dict.xAlias}: {cmd.x_alias}
+            </p>
+          )}
           {/* 言語ごとに説明は1つだけ（jaは日本語・それ以外は英語） */}
           {locale === "ja" ? (
             cmd.ja ? (

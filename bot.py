@@ -227,6 +227,37 @@ async def monitor_mentions(client, queue, track, sessions):
 OPTION_NAMES = {'insert', 'now', 'remove', 'shuffle', 'reverse', 'search'}
 OPTION_VALUES = {'sort', 'start', 'end', 'search-type'}
 
+# コマンド短縮エイリアス（1〜2文字で操作できる）
+CMD_ALIASES = {
+    'play': ('play', 'p'),
+    'insert': ('insert', 'i'),
+    'join': ('join', 'j'),
+    'leave': ('leave', 'l'),
+    'pause': ('pause', 'pa'),
+    'resume': ('resume', 'r'),
+    'skip': ('skip', 'next', 's'),
+    'forward': ('forward', 'f'),
+    'backward': ('backward', 'b'),
+    'volume': ('volume', 'v'),
+    'shuffle': ('shuffle', 'sf'),
+    'queue': ('queue', 'q'),
+    'np': ('np', 'nowplaying', 'n'),
+    'nextup': ('nextup', 'nu'),
+    'recent': ('recent', 'rc'),
+    'stats': ('stats', 'st'),
+    'remove': ('remove', 'rm'),
+    'clear': ('clear', 'cl'),
+    'help': ('help', 'h'),
+}
+
+
+def get_command(cmd):
+    """短縮エイリアスを正規コマンド名に解決"""
+    for canonical, names in CMD_ALIASES.items():
+        if cmd in names:
+            return canonical
+    return cmd
+
 
 def parse_options(rest_norm, body_orig):
     """正規化済みrestからオプションを判定し、元の本文からクエリを切り出す"""
@@ -261,11 +292,11 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
     body = re.sub(r'@\w+', '', text).strip()
     low = unicodedata.normalize('NFKC', body).lower()
     m = re.match(r'!?\s*([a-z0-9]+)', low)
-    cmd = m.group(1) if m else ''
+    cmd = get_command(m.group(1) if m else '')
     rest = low[m.end():].strip() if m else ''
 
     # --- Playback系 ---
-    if cmd in ('play', 'p'):
+    if cmd == 'play':
         opts, query = parse_options(rest, re.sub(r'^!?\S+\s*', '', body))
         if not query:
             await post_reply(client, tweet.id, '🎵 曲名かURLを「play 曲名」で送ってね！（オプション: insert / now）')
@@ -324,7 +355,7 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
     elif cmd == 'resume':
         track.resume()
         await post_reply(client, tweet.id, '▶️ 再開しました')
-    elif cmd in ('skip', 'next'):
+    elif cmd == 'skip':
         track.skip()
         await post_reply(client, tweet.id, '⏭️ スキップします')
     elif cmd == 'forward':
@@ -345,7 +376,7 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
         queue.shuffle()
         await post_reply(client, tweet.id, '🔀 シャッフルしました')
     # --- Information系 ---
-    elif cmd in ('queue', 'q'):
+    elif cmd == 'queue':
         items = queue.list()
         if not items:
             await post_reply(client, tweet.id, '📭 キューは空です')
@@ -353,7 +384,7 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
             lines = [f'{i + 1}. {it["title"]}（{it["user"]}）' for i, it in enumerate(items[:10])]
             extra = f'\n... 他{len(items) - 10}曲' if len(items) > 10 else ''
             await post_reply(client, tweet.id, '📋 キュー:\n' + '\n'.join(lines) + extra)
-    elif cmd in ('np', 'nowplaying'):
+    elif cmd == 'np':
         cur = sessions.get('current')
         if cur:
             await post_reply(client, tweet.id, f'🎵 再生中: {cur["title"]}（リクエスト: {cur["user"]}）')
