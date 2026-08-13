@@ -848,7 +848,7 @@
       }
      ],
      "command": "search",
-     "x": true,
+     "x": false,
      "ja": "曲名を検索してキューに追加します（playと同じ動作）。例: !search 曲名"
     },
     {
@@ -1413,9 +1413,8 @@
       }
      ],
      "command": "wind to",
-     "x": true,
-     "ja": "再生位置を指定秒数に移動します。例: !windto 90",
-     "x_alias": "!windto 秒"
+     "x": false,
+     "ja": "再生位置を指定秒数に移動します。例: !windto 90"
     }
    ],
    "subCategories": []
@@ -1448,7 +1447,7 @@
       }
      ],
      "command": "reverse",
-     "x": true,
+     "x": false,
      "ja": "キューを逆順にします。例: !reverse"
     },
     {
@@ -1532,7 +1531,7 @@
       }
      ],
      "command": "sort",
-     "x": true,
+     "x": false,
      "ja": "キューを並べ替えます。例: !sort title"
     },
     {
@@ -1627,7 +1626,7 @@
       }
      ],
      "command": "move",
-     "x": true,
+     "x": false,
      "ja": "キューの曲を移動します。例: !move 3 5"
     },
     {
@@ -1660,7 +1659,7 @@
       }
      ],
      "command": "swap",
-     "x": true,
+     "x": false,
      "ja": "キューの2曲を入れ替えます。例: !swap 1 2"
     },
     {

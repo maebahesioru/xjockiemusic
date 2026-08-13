@@ -2,7 +2,7 @@
 # 方式: スペースURLのツイートのリプにメンションでコマンド → キュー操作・スペース再生
 # コマンド（Jockie Music公式よりX版適応）:
 #   play/search <曲名/URL> / insert <曲名/URL> / join / leave / pause / resume
-#   skip / forward / backward / windto <秒> / volume <0-200> / shuffle / reverse
+#   skip / forward / backward / volume <0-200> / shuffle
 #   sort [title|user] / move <from> <to> / swap <a> <b> / queue / np / nextup
 #   recent / stats / remove <N> / clear / help
 import asyncio
@@ -239,16 +239,6 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
         n = queue.add(title, url, user)
         await post_reply(client, tweet.id, f'✅ {n}曲目に追加: {title}')
 
-    elif '!search' in low:
-        m2 = re.search(r'!search\s+(.+)', text)
-        query = m2.group(1).strip() if m2 else ''
-        if not query:
-            await post_reply(client, tweet.id, '🎵 「!search 曲名」で検索してね！')
-            return
-        title, url, dur = await resolve(query)
-        n = queue.add(title, url, user)
-        await post_reply(client, tweet.id, f'🔍 検索結果を追加: {title}（{n}曲目）')
-
     elif '!insert' in low:
         m2 = re.search(r'!insert\s+(.+)', text)
         query = m2.group(1).strip() if m2 else ''
@@ -293,13 +283,6 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
     elif '!backward' in low:
         track.seek(-30)
         await post_reply(client, tweet.id, '⏪ -30秒 巻き戻し')
-    elif re.search(r'!windto\s+\d', low):
-        m2 = re.search(r'!windto\s+(\d+)', low)
-        if m2:
-            secs = int(m2.group(1))
-            track.seek(secs - (sessions.get('pos', 0)))
-            sessions['pos'] = secs
-            await post_reply(client, tweet.id, f'🎯 {secs}秒の位置へ移動')
     elif re.search(r'!volume\s+\d', low):
         m2 = re.search(r'!volume\s+(\d+)', low)
         if m2:
@@ -311,29 +294,6 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
     elif '!shuffle' in low:
         queue.shuffle()
         await post_reply(client, tweet.id, '🔀 シャッフルしました')
-    elif '!reverse' in low:
-        queue.reverse()
-        await post_reply(client, tweet.id, '🔄 キューを逆順にしました')
-    elif re.search(r'!sort', low):
-        key = 'title'
-        m2 = re.search(r'!sort\s+(\w+)', low)
-        if m2:
-            key = m2.group(1)
-        queue.sort_by(key if key in ('title', 'user') else 'title')
-        await post_reply(client, tweet.id, f'🗂️ キューを {key} で並べ替えました')
-    elif re.search(r'!move\s+\d', low):
-        parts = re.findall(r'\d+', text)
-        if len(parts) >= 2:
-            frm, to = int(parts[0]) - 1, int(parts[1]) - 1
-            it = queue.move(frm, to)
-            await post_reply(client, tweet.id, f'📦 移動: {it["title"]}' if it else '❌ 範囲外の番号')
-    elif re.search(r'!swap\s+\d', low):
-        parts = re.findall(r'\d+', text)
-        if len(parts) >= 2:
-            a, b = int(parts[0]) - 1, int(parts[1]) - 1
-            ok = queue.swap(a, b)
-            await post_reply(client, tweet.id, '🔄 入れ替えました' if ok else '❌ 範囲外の番号')
-
     # --- Information系 ---
     elif '!queue' in low or re.search(r'!q\b', low):
         items = queue.list()
@@ -386,7 +346,7 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
                          '🎵 X版Jockie Music コマンド:\n'
                          '!play 曲名/URL / !insert 曲名（次の曲に）\n'
                          '!skip / !pause / !resume / !forward / !backward / !volume 数値\n'
-                         '!shuffle / !reverse / !move A B / !swap A B / !sort\n'
+                         '!shuffle / !insert 曲名\n'
                          '!queue / !np / !nextup / !recent / !stats / !remove 番号 / !clear / !help')
 
 
