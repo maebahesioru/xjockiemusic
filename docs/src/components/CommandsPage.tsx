@@ -98,16 +98,16 @@ export default function CommandsPage({ locale }: { locale: string }) {
 
   const total = useMemo(() => {
     let n = 0;
-    for (const cat of commandsData.categories) n += cat.commands.length;
-    return n + commandsData.unknown.length;
+    for (const cat of commandsData.categories) n += (cat.commands || []).length;
+    return n + (commandsData.unknown || []).length;
   }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const result: { name: string; commands: Command[] }[] = [];
-    for (const cat of commandsData.categories) {
+    for (const cat of commandsData.categories || []) {
       if (catFilter !== "all" && cat.name !== catFilter) continue;
-      let cmds = cat.commands;
+      let cmds = cat.commands || [];
       if (q) {
         cmds = cmds.filter(
           (c) =>
@@ -118,7 +118,7 @@ export default function CommandsPage({ locale }: { locale: string }) {
       if (cmds.length > 0) result.push({ name: cat.name, commands: cmds });
     }
     if (catFilter === "all" || catFilter === "unknown") {
-      let cmds = commandsData.unknown;
+      let cmds = commandsData.unknown || [];
       if (q) {
         cmds = cmds.filter(
           (c) =>
@@ -152,7 +152,7 @@ export default function CommandsPage({ locale }: { locale: string }) {
           className="rounded-lg border border-neutral-700 bg-[#1d1925] px-3 py-2.5 text-sm text-white outline-none focus:border-jockie"
         >
           <option value="all">{dict.allCategories}</option>
-          {commandsData.categories.map((c) => (
+          {(commandsData.categories || []).map((c) => (
             <option key={c.name} value={c.name}>
               {c.name}
             </option>
