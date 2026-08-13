@@ -29,8 +29,7 @@
      "description": "Deletes all command related messages",
      "arguments": [],
      "command": "clean",
-     "x": true,
-     "ja": "botの関連ツイート（コマンド応答のリプライ）を全部削除して整理します。"
+     "x": false
     },
     {
      "short_description": "Do you wish to support this project? Consider donating",
@@ -42,8 +41,7 @@
      "options": [],
      "arguments": [],
      "command": "premium",
-     "x": false,
-     "ja": "プレミアムプランの情報を表示します。"
+     "x": false
     },
     {
      "short_description": "View all the leaderboards",
@@ -62,8 +60,7 @@
      ],
      "arguments": [],
      "command": "leaderboard",
-     "x": false,
-     "ja": "リーダーボードを表示します。"
+     "x": false
     },
     {
      "short_description": "Shows the leaderboard for bot upvotes",
@@ -89,8 +86,7 @@
      "description": "Shows the leaderboard for bot upvotes, by default it shows the upvotes from the start of the current month",
      "arguments": [],
      "command": "leaderboard votes",
-     "x": false,
-     "ja": "botの投票（upvote）リーダーボードを表示します。"
+     "x": false
     },
     {
      "aliases": [
@@ -102,8 +98,7 @@
      "description": "Vote for the bot on bot lists to support it!",
      "arguments": [],
      "command": "vote",
-     "x": false,
-     "ja": "botリストで投票してbotを応援できます！"
+     "x": false
     }
    ],
    "subCategories": [
@@ -298,8 +293,7 @@
      "description": "Toggle autoplay, autoplay will queue related tracks when there are no more tracks in the queue.",
      "arguments": [],
      "command": "autoplay toggle",
-     "x": false,
-     "ja": "オートプレイの切り替え。有効にするとキューが空になったとき関連曲を自動で追加します。"
+     "x": false
     },
     {
      "aliases": [
@@ -390,7 +384,7 @@
      ],
      "command": "play",
      "x": true,
-     "ja": "曲名やURLからトラックを検索してキューに追加します。スペースツイートのリプで「play 曲名」と送るだけ！"
+     "ja": "曲名やURLを検索してキューに追加します。例: !play 星野源 SUN"
     },
     {
      "aliases": [
@@ -466,8 +460,7 @@
      "description": "Queue your recently played tracks",
      "arguments": [],
      "command": "playrecent",
-     "x": false,
-     "ja": "最近再生した曲をキューに追加します。"
+     "x": false
     },
     {
      "aliases": [],
@@ -536,8 +529,7 @@
       }
      ],
      "command": "radio",
-     "x": false,
-     "ja": "ラジオ局を検索して再生します。"
+     "x": false
     },
     {
      "short_description": "Resume a previous session",
@@ -555,8 +547,7 @@
      "description": "Resume your most recent session which you were the owner of, resuming a session will make it go back to the exact state it was in before the bot left.",
      "arguments": [],
      "command": "resume session",
-     "x": false,
-     "ja": "自分がオーナーだった直近のセッションを再開します。"
+     "x": false
     },
     {
      "short_description": "Makes me join your voice channel",
@@ -570,7 +561,7 @@
      "arguments": [],
      "command": "join",
      "x": true,
-     "ja": "スペースに参加します。スピーカーリクエスト（スピリク）を自動送信してホストの承認を待ちます。"
+     "ja": "スペースに参加してスピーカーリクエストを送信します。例: !join"
     },
     {
      "short_description": "Makes me leave the voice channel",
@@ -609,7 +600,7 @@
      ],
      "command": "leave",
      "x": true,
-     "ja": "ボイスチャンネル（X版: スペース）から退出します。時間指定で遅延退出も可能。"
+     "ja": "スペースから離脱して再生を停止します。例: !leave"
     },
     {
      "aliases": [
@@ -669,8 +660,7 @@
       }
      ],
      "command": "album search",
-     "x": false,
-     "ja": "アルバムを検索してキューに追加します。"
+     "x": false
     },
     {
      "aliases": [
@@ -732,8 +722,7 @@
       }
      ],
      "command": "playlist search",
-     "x": false,
-     "ja": "プレイリストを検索してキューに追加します。"
+     "x": false
     },
     {
      "aliases": [],
@@ -793,7 +782,7 @@
      ],
      "command": "search",
      "x": true,
-     "ja": "再生する曲を検索します（playと同じ動作）。"
+     "ja": "曲名を検索してキューに追加します（playと同じ動作）。例: !search 曲名"
     },
     {
      "aliases": [],
@@ -879,7 +868,7 @@
      ],
      "command": "insert",
      "x": true,
-     "ja": "現在再生中の曲の直後にトラックを挿入します。すぐ聴きたい曲を割り込ませたい時に便利。"
+     "ja": "次の曲としてキューに挿入します。例: !insert 曲名"
     },
     {
      "aliases": [
@@ -937,8 +926,7 @@
       }
      ],
      "command": "playleave",
-     "x": false,
-     "ja": "トラックをキューに追加し、再生が終わったらbotが退出します。"
+     "x": false
     },
     {
      "short_description": "Select and queue a single track from a playlist by url",
@@ -1000,8 +988,7 @@
       }
      ],
      "command": "playselect",
-     "x": false,
-     "ja": "URLからプレイリスト内の1曲を選んでキューに追加します。"
+     "x": false
     },
     {
      "short_description": "Queue a single track from a playlist by url",
@@ -1064,8 +1051,7 @@
       }
      ],
      "command": "playsingle",
-     "x": false,
-     "ja": "URLからプレイリスト内の1曲をキューに追加します。"
+     "x": false
     }
    ],
    "subCategories": []
@@ -1110,7 +1096,7 @@
      ],
      "command": "backward",
      "x": true,
-     "ja": "トラックを巻き戻します。時間指定可（0h 0m 0s形式）。X版では!backwardで30秒戻し。"
+     "ja": "再生位置を30秒戻します。例: !backward"
     },
     {
      "short_description": "Set the end position of the current track",
@@ -1150,8 +1136,7 @@
       }
      ],
      "command": "end time",
-     "x": false,
-     "ja": "現在のトラックの終了位置を設定します。"
+     "x": false
     },
     {
      "short_description": "Wind the track forwards",
@@ -1170,7 +1155,7 @@
      ],
      "command": "forward",
      "x": true,
-     "ja": "トラックを早送りします。時間指定可。X版では!forwardで30秒進み。"
+     "ja": "再生位置を30秒進めます。例: !forward"
     },
     {
      "short_description": "Pause the current session",
@@ -1186,7 +1171,7 @@
      "arguments": [],
      "command": "pause",
      "x": true,
-     "ja": "再生を一時停止します（!resumeで再開）。"
+     "ja": "再生を一時停止します。例: !pause"
     },
     {
      "short_description": "Resume playing the current track",
@@ -1199,7 +1184,7 @@
      "arguments": [],
      "command": "resume",
      "x": true,
-     "ja": "一時停止した再生を再開します。"
+     "ja": "一時停止した再生を再開します。例: !resume"
     },
     {
      "short_description": "Set the start position of the current track",
@@ -1239,8 +1224,7 @@
       }
      ],
      "command": "start time",
-     "x": false,
-     "ja": "現在のトラックの開始位置を設定します。"
+     "x": false
     },
     {
      "short_description": "Change the volume",
@@ -1281,7 +1265,7 @@
      ],
      "command": "volume",
      "x": true,
-     "ja": "音量を変更します（デフォルト100・X版は0〜200）。例: !volume 150"
+     "ja": "音量を変更します（0〜200・標準100）。例: !volume 150"
     },
     {
      "short_description": "Wind to the desired position in the track",
@@ -1320,7 +1304,7 @@
      ],
      "command": "wind to",
      "x": true,
-     "ja": "トラックの希望位置に移動します。X版: !windto 秒数",
+     "ja": "再生位置を指定秒数に移動します。例: !windto 90",
      "x_alias": "!windto 秒"
     }
    ],
@@ -1355,7 +1339,7 @@
      ],
      "command": "reverse",
      "x": true,
-     "ja": "現在のキューを逆順にします。"
+     "ja": "キューを逆順にします。例: !reverse"
     },
     {
      "short_description": "Shuffle the queue",
@@ -1397,7 +1381,7 @@
      ],
      "command": "shuffle",
      "x": true,
-     "ja": "キューをシャッフルします。"
+     "ja": "キューをシャッフルします。例: !shuffle"
     },
     {
      "short_description": "Sort the queue",
@@ -1435,7 +1419,7 @@
      ],
      "command": "sort",
      "x": true,
-     "ja": "キューを並べ替えます。X版: !sort title / !sort user"
+     "ja": "キューを並べ替えます。例: !sort title"
     },
     {
      "short_description": "Move multiple tracks in the queue",
@@ -1481,8 +1465,7 @@
       }
      ],
      "command": "mass move",
-     "x": false,
-     "ja": "キュー内の複数トラックをまとめて移動します（first/last指定可）。"
+     "x": false
     },
     {
      "short_description": "Move a track in the queue",
@@ -1530,7 +1513,7 @@
      ],
      "command": "move",
      "x": true,
-     "ja": "キュー内のトラックを移動します。X版: !move 3 5（3曲目を5番目へ）"
+     "ja": "キューの曲を移動します。例: !move 3 5"
     },
     {
      "aliases": [],
@@ -1563,7 +1546,7 @@
      ],
      "command": "swap",
      "x": true,
-     "ja": "キュー内の2つのトラックの位置を入れ替えます。X版: !swap 1 2"
+     "ja": "キューの2曲を入れ替えます。例: !swap 1 2"
     },
     {
      "short_description": "Order the queue by specified option",
@@ -1604,8 +1587,7 @@
       }
      ],
      "command": "reorder",
-     "x": false,
-     "ja": "指定オプションでキューを並べ替えます。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -2170,7 +2152,7 @@
      "arguments": [],
      "command": "next up",
      "x": true,
-     "ja": "次に再生されるトラックの情報を表示します（X版: !nextup）。",
+     "ja": "次に再生される曲を表示します。例: !nextup",
      "x_alias": "!nextup"
     },
     {
@@ -2187,7 +2169,7 @@
      "arguments": [],
      "command": "now playing",
      "x": true,
-     "ja": "現在再生中のトラックを表示します（X版: !np / !nowplaying）。",
+     "ja": "現在再生中の曲を表示します。例: !np",
      "x_alias": "!np / !nowplaying"
     },
     {
@@ -2240,7 +2222,7 @@
      ],
      "command": "queue",
      "x": true,
-     "ja": "キューの全リストを表示します（X版実装済み）。"
+     "ja": "現在のキューを表示します。例: !queue"
     },
     {
      "short_description": "Get information about the queue",
@@ -2254,8 +2236,7 @@
      "options": [],
      "arguments": [],
      "command": "queue information",
-     "x": false,
-     "ja": "キューに関する情報を表示します。"
+     "x": false
     },
     {
      "aliases": [
@@ -2270,7 +2251,7 @@
      "arguments": [],
      "command": "recently played",
      "x": true,
-     "ja": "最近聴いたトラックの履歴を表示します（X版: !recent）。",
+     "ja": "最近再生した曲を表示します。例: !recent",
      "x_alias": "!recent"
     },
     {
@@ -2301,8 +2282,7 @@
       }
      ],
      "command": "requested",
-     "x": false,
-     "ja": "各曲を誰がリクエストしたかを表示します。"
+     "x": false
     },
     {
      "short_description": "Save a song to our private messages",
@@ -2328,8 +2308,7 @@
       }
      ],
      "command": "save",
-     "x": false,
-     "ja": "現在の曲の情報をDMで送信します。"
+     "x": false
     },
     {
      "aliases": [
@@ -2348,8 +2327,7 @@
      "description": "Get information about the current session",
      "arguments": [],
      "command": "session information",
-     "x": false,
-     "ja": "現在のセッションの情報を表示します。"
+     "x": false
     },
     {
      "aliases": [
@@ -2362,7 +2340,7 @@
      "arguments": [],
      "command": "session statistics",
      "x": true,
-     "ja": "現在のセッションの統計を表示します（X版: !stats）。",
+     "ja": "再生統計を表示します。例: !stats",
      "x_alias": "!stats"
     },
     {
@@ -2399,8 +2377,7 @@
      "description": "Get a list of all the upcoming tracks, not to be confused with the `queue` command which will show all the tracks including the ones already played",
      "arguments": [],
      "command": "upcoming",
-     "x": false,
-     "ja": "今後のトラックのリストを表示します。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -2565,8 +2542,7 @@
       }
      ],
      "command": "profile set server visibility",
-     "x": false,
-     "ja": "このサーバーでプロフィールデータを見られる人を設定します。"
+     "x": false
     },
     {
      "short_description": "View your profile",
@@ -2591,8 +2567,7 @@
       }
      ],
      "command": "profile",
-     "x": false,
-     "ja": "プロフィールを表示します。"
+     "x": false
     },
     {
      "short_description": "Set your profile avatar background",
@@ -2629,8 +2604,7 @@
       }
      ],
      "command": "profile set avatar background",
-     "x": false,
-     "ja": "プロフィールのアバター背景を設定します。"
+     "x": false
     },
     {
      "short_description": "Set your profile avatar border",
@@ -2667,8 +2641,7 @@
       }
      ],
      "command": "profile set avatar border",
-     "x": false,
-     "ja": "プロフィールのアバター枠を設定します。"
+     "x": false
     },
     {
      "short_description": "Set your profile avatar shape, `circle` or `square`",
@@ -2705,8 +2678,7 @@
       }
      ],
      "command": "profile set avatar shape",
-     "x": false,
-     "ja": "プロフィールのアバター形状を設定します。"
+     "x": false
     },
     {
      "short_description": "Set your profile background",
@@ -2750,8 +2722,7 @@
       }
      ],
      "command": "profile set background",
-     "x": false,
-     "ja": "プロフィールの背景を設定します。"
+     "x": false
     },
     {
      "short_description": "Set your profile color",
@@ -2793,8 +2764,7 @@
       }
      ],
      "command": "profile set color",
-     "x": false,
-     "ja": "プロフィールの色を設定します。"
+     "x": false
     },
     {
      "short_description": "Set what parts (servers, friends and tracks) are visible on your profile",
@@ -2838,8 +2808,7 @@
       }
      ],
      "command": "profile set privacy",
-     "x": false,
-     "ja": "プロフィールの公開範囲を設定します。"
+     "x": false
     },
     {
      "short_description": "Set who can view your profile, `public` or `private`",
@@ -2877,8 +2846,7 @@
       }
      ],
      "command": "profile set visibility",
-     "x": false,
-     "ja": "プロフィールを見られる人を設定します（public/private等）。"
+     "x": false
     }
    ],
    "subCategories": []
@@ -2910,8 +2878,7 @@
       }
      ],
      "command": "collection clone",
-     "x": false,
-     "ja": "コレクションを複製します。"
+     "x": false
     },
     {
      "short_description": "Delete a saved collection",
@@ -2936,8 +2903,7 @@
       }
      ],
      "command": "collection delete",
-     "x": false,
-     "ja": "コレクションを削除します。"
+     "x": false
     },
     {
      "short_description": "Import your Groovy playlist from a CSV file",
@@ -2952,8 +2918,7 @@
       }
      ],
      "command": "collection import",
-     "x": false,
-     "ja": "コレクションをインポートします（プレミアム限定）。"
+     "x": false
     },
     {
      "short_description": "Merge two of your collections together",
@@ -2979,8 +2944,7 @@
       }
      ],
      "command": "collection merge",
-     "x": false,
-     "ja": "2つのコレクションを統合します。"
+     "x": false
     },
     {
      "short_description": "Shows all your saved collections and their content",
@@ -3007,8 +2971,7 @@
       }
      ],
      "command": "collections",
-     "x": false,
-     "ja": "コレクションの一覧を表示します。"
+     "x": false
     },
     {
      "short_description": "Create an empty collection",
@@ -3033,8 +2996,7 @@
       }
      ],
      "command": "collection create",
-     "x": false,
-     "ja": "新しいコレクションを作成します。"
+     "x": false
     },
     {
      "short_description": "Save the current queue",
@@ -3059,8 +3021,7 @@
       }
      ],
      "command": "collection save",
-     "x": false,
-     "ja": "現在のキューをコレクションとして保存します。"
+     "x": false
     },
     {
      "aliases": [
@@ -3132,8 +3093,7 @@
       }
      ],
      "command": "collection load",
-     "x": false,
-     "ja": "既存のコレクションをキューに読み込んで再生します。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -3478,8 +3438,7 @@
      ],
      "arguments": [],
      "command": "settings",
-     "x": false,
-     "ja": "現在の設定を表示します。"
+     "x": false
     },
     {
      "short_description": "Reset all the settings",
@@ -3510,8 +3469,7 @@
      ],
      "arguments": [],
      "command": "settings reset",
-     "x": false,
-     "ja": "設定をリセットします。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -5046,8 +5004,7 @@
       }
      ],
      "command": "permission allow",
-     "x": false,
-     "ja": "セッションの特定の権限を許可します。"
+     "x": false
     },
     {
      "short_description": "Deny a specific permission for the current session",
@@ -5102,8 +5059,7 @@
       }
      ],
      "command": "permission deny",
-     "x": false,
-     "ja": "セッションの特定の権限を拒否します。"
+     "x": false
     },
     {
      "short_description": "Get the permissions of the current session or a user",
@@ -5156,8 +5112,7 @@
       }
      ],
      "command": "permissions",
-     "x": false,
-     "ja": "セッションまたはユーザーの権限を表示します。"
+     "x": false
     },
     {
      "short_description": "Allow all permissions",
@@ -5206,8 +5161,7 @@
       }
      ],
      "command": "permissions allow all",
-     "x": false,
-     "ja": "すべての権限を許可します。"
+     "x": false
     },
     {
      "short_description": "Deny all permission for the current session",
@@ -5256,8 +5210,7 @@
       }
      ],
      "command": "permissions deny all",
-     "x": false,
-     "ja": "すべての権限を拒否します。"
+     "x": false
     },
     {
      "short_description": "Reset the permissions of a session or user",
@@ -5303,8 +5256,7 @@
       }
      ],
      "command": "permissions reset",
-     "x": false,
-     "ja": "権限設定をリセットします。"
+     "x": false
     }
    ],
    "subCategories": []
@@ -5324,8 +5276,7 @@
      "options": [],
      "arguments": [],
      "command": "claim ownership",
-     "x": false,
-     "ja": "セッションのオーナー権を主張します。"
+     "x": false
     },
     {
      "short_description": "Update announcement channel",
@@ -5347,8 +5298,7 @@
       }
      ],
      "command": "rebind",
-     "x": false,
-     "ja": "アナウンスするチャンネルを更新します。"
+     "x": false
     },
     {
      "short_description": "Transfer the session ownership to another member",
@@ -5372,8 +5322,7 @@
       }
      ],
      "command": "transfer ownership",
-     "x": false,
-     "ja": "セッションのオーナー権を別のユーザーに譲渡します。"
+     "x": false
     }
    ],
    "subCategories": []
@@ -5403,8 +5352,7 @@
      ],
      "arguments": [],
      "command": "prefix list",
-     "x": false,
-     "ja": "使用可能なプレフィックスの一覧を表示します。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -5685,8 +5633,7 @@
       }
      ],
      "command": "announce channel reset",
-     "x": false,
-     "ja": "設定されているアナウンスチャンネルを解除します。"
+     "x": false
     },
     {
      "short_description": "Set the announce channel for all sessions",
@@ -5730,8 +5677,7 @@
       }
      ],
      "command": "announce channel set",
-     "x": false,
-     "ja": "アナウンスチャンネルを設定します。"
+     "x": false
     },
     {
      "short_description": "Auto deletes the message which triggered a command",
@@ -5752,8 +5698,7 @@
      "description": "Auto deletes the message which triggered a command, note that this does not delete the bot's response",
      "arguments": [],
      "command": "auto delete toggle",
-     "x": false,
-     "ja": "コマンドをトリガーしたメッセージを自動削除するか切り替えます。"
+     "x": false
     },
     {
      "short_description": "24/7 mode, the bot will not leave the channel by itself",
@@ -5813,8 +5758,7 @@
      ],
      "boosts": 5,
      "command": "24/7",
-     "x": false,
-     "ja": "24/7モードを切り替えます。有効にするとbotが自分から退出しなくなります。"
+     "x": false
     },
     {
      "short_description": "Lock the session, locking a session disables the permissions",
@@ -5833,8 +5777,7 @@
      "description": "Lock the session, locking a session disables the permissions for that session, meaning no one will be able to change anything. A locked session can also be unlocked with this command",
      "arguments": [],
      "command": "lock",
-     "x": false,
-     "ja": "セッションをロックして権限変更を無効化します。"
+     "x": false
     },
     {
      "short_description": "Allows a single user to own multiple sessions",
@@ -5878,8 +5821,7 @@
       }
      ],
      "command": "multi bot ownership",
-     "x": false,
-     "ja": "複数botのオーナー設定を管理します。"
+     "x": false
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -5923,8 +5865,7 @@
       }
      ],
      "command": "preferred bots server",
-     "x": false,
-     "ja": "サーバーでbotが参加する優先順を設定します。"
+     "x": false
     },
     {
      "short_description": "Set who can view dashboard statistics for this server, `everyone` or `none`",
@@ -5970,8 +5911,7 @@
       }
      ],
      "command": "dashboard statistics access",
-     "x": false,
-     "ja": "サーバーのダッシュボード統計を見られる人を設定します。"
+     "x": false
     },
     {
      "short_description": "Auto deletes paged messages when they are replaced",
@@ -5990,8 +5930,7 @@
      "description": "Toggle whether or not paged results should be deleted once they are replaced by a new one from another command, when this is disabled it will keep the message and prevent further input after it has been replaced.\n\nNote that this only applies to new paged results from the same user.",
      "arguments": [],
      "command": "page replace delete toggle",
-     "x": false,
-     "ja": "ページ結果を置換するか削除するかを切り替えます。"
+     "x": false
     },
     {
      "short_description": "Auto deletes paged messages when they timeout",
@@ -6010,8 +5949,7 @@
      "description": "Toggle whether or not paged results should be deleted once they timeout, when this is disabled it will keep the message and prevent further input after it has has timedout",
      "arguments": [],
      "command": "page delete toggle",
-     "x": false,
-     "ja": "ページ結果を削除するかどうかを切り替えます。"
+     "x": false
     },
     {
      "short_description": "Set the timeout time for sessions",
@@ -6068,8 +6006,7 @@
       }
      ],
      "command": "timeout set",
-     "x": false,
-     "ja": "セッションのタイムアウト時間を設定します。"
+     "x": false
     },
     {
      "short_description": "View all session timeout durations",
@@ -6079,8 +6016,7 @@
      "options": [],
      "arguments": [],
      "command": "timeouts",
-     "x": false,
-     "ja": "タイムアウトの一覧を表示します。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -6945,8 +6881,7 @@
      "description": "Toggle automatic correction of misspelled commands, for instance, if you write `pley hello` it would be corrected to `play hello`. It will ask you before executing the command.",
      "arguments": [],
      "command": "auto correct toggle",
-     "x": false,
-     "ja": "コマンドの誤字を自動修正するか切り替えます。"
+     "x": false
     },
     {
      "short_description": "Set the preferred order you want the bots to join in",
@@ -7001,8 +6936,7 @@
       }
      ],
      "command": "preferred bots",
-     "x": false,
-     "ja": "botが参加する優先順を設定します。"
+     "x": false
     },
     {
      "short_description": "Toggle automatic default volume mode",
@@ -7015,8 +6949,7 @@
      "description": "Toogle automatic default volume mode, this means that if you set the volume with the `volume` command it will automatically update your default volume. Note that this will only work if the properties mode is set to user",
      "arguments": [],
      "command": "volume automatic toggle",
-     "x": false,
-     "ja": "自動デフォルト音量モードを切り替えます。"
+     "x": false
     }
    ],
    "subCategories": []
@@ -7083,8 +7016,7 @@
      ],
      "boosts": 5,
      "command": "24/7",
-     "x": false,
-     "ja": "24/7モードを切り替えます。有効にするとbotが自分から退出しなくなります。"
+     "x": false
     },
     {
      "short_description": "Import your Groovy playlist from a CSV file",
@@ -7099,8 +7031,7 @@
       }
      ],
      "command": "collection import",
-     "x": false,
-     "ja": "コレクションをインポートします（プレミアム限定）。"
+     "x": false
     }
    ],
    "subCategories": [
@@ -7681,8 +7612,7 @@
    "description": "Use this to get to the previous page of a paged message",
    "arguments": [],
    "command": "previous page",
-   "x": false,
-   "ja": "ページ表示の前のページに移動します。"
+   "x": false
   },
   {
    "aliases": [
@@ -7702,8 +7632,7 @@
     }
    ],
    "command": "go to page",
-   "x": false,
-   "ja": "ページ表示の任意のページに移動します。"
+   "x": false
   },
   {
    "aliases": [
@@ -7715,8 +7644,7 @@
    "description": "Use this to get to the next page of a paged message",
    "arguments": [],
    "command": "next page",
-   "x": false,
-   "ja": "ページ表示の次のページに移動します。"
+   "x": false
   },
   {
    "aliases": [],
@@ -7726,8 +7654,7 @@
    "description": "Use this to cancel a paged message",
    "arguments": [],
    "command": "cancel",
-   "x": false,
-   "ja": "ページ表示をキャンセルします。"
+   "x": false
   },
   {
    "aliases": [
@@ -7750,8 +7677,7 @@
     }
    ],
    "command": "select",
-   "x": false,
-   "ja": "選択肢から項目を選びます。"
+   "x": false
   },
   {
    "short_description": "Use this to have me re-send any paged message",
@@ -7764,8 +7690,7 @@
    "description": "Use this to have me re-send any paged message, note that this will only re-send any already existing paged result and will not do anything if it timed-out",
    "arguments": [],
    "command": "renew",
-   "x": false,
-   "ja": "ページ表示を更新します。"
+   "x": false
   }
  ]
 }

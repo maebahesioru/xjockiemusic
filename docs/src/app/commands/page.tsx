@@ -14,34 +14,20 @@ function CommandRow({
   loc: string;
 }) {
   const [open, setOpen] = useState(false);
-  const name = cmd.command || "(undefined)";
-  const usage = cmd.usage || name;
+  const name = cmd.command || "";
   return (
     <div className="border-b border-neutral-800 last:border-b-0">
       <button
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-2 px-4 py-3 text-left hover:bg-white/5"
       >
-        <div className="flex flex-wrap items-center gap-2">
-          <code className="font-mono text-sm font-semibold text-jockie">
-            !{name}
-          </code>
-          {cmd.x && (
-            <span className="rounded bg-green-900/60 px-1.5 py-0.5 text-[10px] font-semibold text-green-400">
-              {dict.xSupported}
-            </span>
-          )}
-          {cmd.aliases?.length > 0 && (
-            <span className="text-xs text-neutral-500">
-              {dict.alias}: {cmd.aliases.join(", ")}
-            </span>
-          )}
-        </div>
+        <code className="font-mono text-sm font-semibold text-jockie">
+          !{name}
+        </code>
         <span className="text-xs text-neutral-500">{open ? "▲" : "▼"}</span>
       </button>
       {open && (
         <div className="space-y-2 bg-black/20 px-4 pb-4">
-          {/* 言語ごとに説明は1つだけ表示（jaは日本語・en/zhは英語） */}
           {loc === "ja" ? (
             cmd.ja ? (
               <p className="text-sm text-white">{cmd.ja}</p>
@@ -55,45 +41,22 @@ function CommandRow({
               <p className="text-sm text-neutral-400">{cmd.description}</p>
             )
           )}
-          {cmd.x_alias && (
-            <p className="text-xs text-green-400">X: {cmd.x_alias}</p>
-          )}
-          {usage && (
-            <p className="text-sm">
-              <span className="text-neutral-500">{dict.usage}: </span>
-              <code className="font-mono text-neutral-300">!{usage}</code>
-            </p>
-          )}
-          {cmd.options && cmd.options.length > 0 && (
-            <div>
-              <div className="mb-1 text-xs text-neutral-500">{dict.options}:</div>
-              {cmd.options.map((o) => (
-                <div key={o.name} className="text-sm text-neutral-400">
-                  <code className="font-mono text-jockie">{o.name}</code>{" "}
-                  {o.description}
-                </div>
-              ))}
-            </div>
-          )}
-          {cmd.examples && cmd.examples.length > 0 && (
-            <div>
-              <div className="mb-1 text-xs text-neutral-500">
-                {dict.examplesLabel}:
-              </div>
-              {cmd.examples.map((e, i) => (
-                <code
-                  key={i}
-                  className="block font-mono text-xs text-neutral-400"
-                >
-                  !{e}
-                </code>
-              ))}
-            </div>
-          )}
         </div>
       )}
     </div>
   );
+}
+
+// X版対応（x: true）コマンドだけを抽出
+function xCommands(): { name: string; commands: Command[] }[] {
+  const result: { name: string; commands: Command[] }[] = [];
+  for (const cat of commandsData.categories) {
+    const cmds = cat.commands.filter((c) => c.x);
+    if (cmds.length > 0) result.push({ name: cat.name, commands: cmds });
+  }
+  const unknown = commandsData.unknown.filter((c) => c.x);
+  if (unknown.length > 0) result.push({ name: "unknown", commands: unknown });
+  return result;
 }
 
 export default function CommandsPage() {
@@ -109,41 +72,29 @@ export default function CommandsPage() {
 
   const dict = getDict(loc);
 
+  const cats = useMemo(() => xCommands(), []);
+  const total = useMemo(
+    () => cats.reduce((a, c) => a + c.commands.length, 0),
+    [cats]
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const result: { name: string; commands: Command[] }[] = [];
-    for (const cat of commandsData.categories) {
+    for (const cat of cats) {
       if (catFilter !== "all" && cat.name !== catFilter) continue;
       let cmds = cat.commands;
       if (q) {
         cmds = cmds.filter(
           (c) =>
             (c.command || "").toLowerCase().includes(q) ||
-            (c.description || "").toLowerCase().includes(q) ||
-            (c.usage || "").toLowerCase().includes(q)
+            (c.ja || c.description || "").toLowerCase().includes(q)
         );
       }
       if (cmds.length > 0) result.push({ name: cat.name, commands: cmds });
     }
-    if (catFilter === "all" || catFilter === "unknown") {
-      let cmds = commandsData.unknown;
-      if (q) {
-        cmds = cmds.filter(
-          (c) =>
-            (c.command || "").toLowerCase().includes(q) ||
-            (c.description || "").toLowerCase().includes(q)
-        );
-      }
-      if (cmds.length > 0) result.push({ name: "unknown", commands: cmds });
-    }
     return result;
-  }, [query, catFilter]);
-
-  const total = useMemo(() => {
-    let n = 0;
-    for (const cat of commandsData.categories) n += cat.commands.length;
-    return n + commandsData.unknown.length;
-  }, []);
+  }, [query, catFilter, cats]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
@@ -166,12 +117,11 @@ export default function CommandsPage() {
           className="rounded-lg border border-neutral-700 bg-[#1d1925] px-3 py-2.5 text-sm text-white outline-none focus:border-jockie"
         >
           <option value="all">{dict.allCategories}</option>
-          {commandsData.categories.map((c) => (
+          {cats.map((c) => (
             <option key={c.name} value={c.name}>
               {c.name}
             </option>
           ))}
-          <option value="unknown">unknown</option>
         </select>
       </div>
 
@@ -191,9 +141,9 @@ export default function CommandsPage() {
               </span>
             </h2>
             <div className="overflow-hidden rounded-lg border border-neutral-800 bg-[#1d1925]">
-              {cat.commands.map((cmd) => (
+              {cat.commands.map((cmd, i) => (
                 <CommandRow
-                  key={cmd.command || Math.random()}
+                  key={cmd.command || `${cat.name}-${i}`}
                   cmd={cmd}
                   dict={dict}
                   loc={loc}

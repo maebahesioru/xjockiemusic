@@ -34,7 +34,7 @@ export const i18n = {
     categories: "📋 カテゴリ一覧",
     commandsTitle: "📋 コマンド一覧（{n}個）",
     commandsDesc:
-      "Jockie Music公式コマンドをX版向けに移植した一覧です。スペースツイートのリプに @JockieMusicPort !コマンド で送ってね。",
+      "X版で実際に動くコマンドの一覧です。スペースツイートのリプに @JockieMusicPort コマンド で送ってね。",
     searchPlaceholder: "🔍 コマンド名・説明で検索…",
     allCategories: "すべてのカテゴリ",
     noCommands: "該当するコマンドがありません",
@@ -72,7 +72,7 @@ export const i18n = {
     categories: "📋 Categories",
     commandsTitle: "📋 All Commands ({n})",
     commandsDesc:
-      "The official Jockie Music commands ported for X. Send them as a reply to your Space tweet with @JockieMusicPort !command.",
+      "Commands that actually work on X. Send them as a reply to your Space tweet with @JockieMusicPort command.",
     searchPlaceholder: "🔍 Search commands…",
     allCategories: "All categories",
     noCommands: "No matching commands",
@@ -110,7 +110,7 @@ export const i18n = {
     categories: "📋 分类列表",
     commandsTitle: "📋 全部命令（{n}个）",
     commandsDesc:
-      "Jockie Music 官方命令的 X 移植版。在 Space 推文的回复中发送 @JockieMusicPort !命令 即可。",
+      "X版可用的命令列表。在 Space 推文的回复中发送 @JockieMusicPort 命令 即可。",
     searchPlaceholder: "🔍 搜索命令…",
     allCategories: "所有分类",
     noCommands: "没有匹配的命令",

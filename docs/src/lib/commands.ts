@@ -41,3 +41,15 @@ export function categoryCounts(): Record<string, number> {
   counts["unknown"] = commandsData.unknown.length;
   return counts;
 }
+
+// X版対応（x: true）コマンドのカテゴリごとの数
+export function xCategoryCounts(): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const cat of commandsData.categories) {
+    const n = cat.commands.filter((c) => c.x).length;
+    if (n > 0) counts[cat.name] = n;
+  }
+  const unk = commandsData.unknown.filter((c) => c.x).length;
+  if (unk > 0) counts["unknown"] = unk;
+  return counts;
+}

@@ -388,52 +388,12 @@ async def handle_command(client, tweet, text, user, queue, track, sessions):
                          '!skip / !pause / !resume / !forward / !backward / !volume 数値\n'
                          '!shuffle / !reverse / !move A B / !swap A B / !sort\n'
                          '!queue / !np / !nextup / !recent / !stats / !remove 番号 / !clear / !help')
-    elif '!clean' in low:
-        # botの関連ツイート（コマンド応答リプライ）を全部削除
-        sent = load_sent()
-        deleted = 0
-        failed = 0
-        for tid in sent:
-            try:
-                await client.delete_tweet(tid)
-                deleted += 1
-            except Exception as e:
-                failed += 1
-                print('削除エラー:', str(e)[:80])
-        save_sent([])
-        await post_reply(client, tweet.id,
-                         f'🧹 botの関連ツイートを{deleted}件削除しました'
-                         + (f'（{failed}件失敗）' if failed else ''))
-
-
-SENT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sent_replies.json')
-
-
-def load_sent():
-    """botが送信したリプライID一覧を読む"""
-    if os.path.exists(SENT_FILE):
-        try:
-            return json.load(open(SENT_FILE, encoding='utf-8'))
-        except Exception:
-            return []
-    return []
-
-
-def save_sent(sent):
-    os.makedirs(os.path.dirname(SENT_FILE), exist_ok=True)
-    json.dump(sent, open(SENT_FILE, 'w', encoding='utf-8'), ensure_ascii=False)
 
 
 async def post_reply(client, reply_to_id, text):
-    """リプライ投稿（送信IDを記録・エラーは握りつぶす）"""
+    """リプライ投稿（エラーは握りつぶす）"""
     try:
-        tweet = await client.create_tweet(text, reply_to=reply_to_id)
-        tid = str(getattr(tweet, 'id', '') or '')
-        if tid:
-            sent = load_sent()
-            if tid not in sent:
-                sent.append(tid)
-                save_sent(sent)
+        await client.create_tweet(text, reply_to=reply_to_id)
     except Exception as e:
         print('リプライ投稿エラー:', str(e)[:120])
 

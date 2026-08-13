@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { getDict } from "@/lib/i18n";
-import { commandsData, categoryCounts } from "@/lib/commands";
+import { xCategoryCounts } from "@/lib/commands";
 
 const BASE = "https://maebahesioru.github.io/xjockiemusic";
 
@@ -9,7 +9,7 @@ export default function RootHomePage() {
   // ルート / は日本語版（canonicalも / に統一）
   const locale = "ja";
   const dict = getDict(locale);
-  const counts = categoryCounts();
+  const counts = xCategoryCounts();
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
   const jsonLd = {
